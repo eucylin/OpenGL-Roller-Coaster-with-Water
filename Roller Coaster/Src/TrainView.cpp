@@ -187,13 +187,14 @@ setProjection()
 	}
 	else if (this->camera == 2){
 		glMatrixMode(GL_PROJECTION);
-		gluPerspective(120, 1, 1, 200); glMatrixMode(GL_MODELVIEW);
+		gluPerspective(120, 1, 1, 200); 
+		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		qt0.normalize();
-		qt.normalize();
-		gluLookAt(qt0.x, qt0.y + 5, qt0.z,
-			qt.x, qt.y + 5, qt.z,
-			orient_t.x, orient_t.y + 5, orient_t.z);
+		//qt0.normalize();
+		//qt.normalize();
+		gluLookAt(tt0.x, tt0.y + 20, tt0.z,
+			tt1.x, tt1.y + 20, tt1.z,
+			orient_t.x, orient_t.y + 20, orient_t.z);
 		update();
 	}
 	// Or do the train view or other view here
@@ -285,6 +286,7 @@ void TrainView::drawTrack(bool doingShadows)
 {
 	track_t type_track = (track_t)track;
 	spline_t type_spline = (spline_t)curve;
+	samplePoints.clear();
 	for (size_t i = 0; i < m_pTrack->points.size(); ++i)
 	{
 		// pos
@@ -293,16 +295,13 @@ void TrainView::drawTrack(bool doingShadows)
 		Pnt3f cp_pos_p3 = m_pTrack->points[(i + 2) % m_pTrack->points.size()].pos;
 		Pnt3f cp_pos_p4 = m_pTrack->points[(i + 3) % m_pTrack->points.size()].pos;
 
-		Pnt3f cp_pos[4] = { cp_pos_p1 = m_pTrack->points[i].pos,
-			cp_pos_p2 = m_pTrack->points[(i + 1) % m_pTrack->points.size()].pos, 
-			cp_pos_p3 = m_pTrack->points[(i + 2) % m_pTrack->points.size()].pos,
-			cp_pos_p4 = m_pTrack->points[(i + 3) % m_pTrack->points.size()].pos
-		};
+		Pnt3f cp_pos[4] = { cp_pos_p1,	cp_pos_p2,	cp_pos_p3,	cp_pos_p4	};
+
 		// orient
 		Pnt3f cp_orient_p1 = m_pTrack->points[i].orient;
 		Pnt3f cp_orient_p2 = m_pTrack->points[(i + 1) % m_pTrack->points.size()].orient;
 
-		qt = cp_pos_p1;
+		qt = qt1;
 		float percent = 1.0f / DIVIDE_LINE;
 		float t = 0;
 		for (size_t j = 0; j < DIVIDE_LINE; j++){
@@ -338,31 +337,29 @@ void TrainView::drawTrack(bool doingShadows)
 					}
 					GMT = GMT + cp_pos[i] * MT[i];
 				}
+				if (t < DIVIDE_LINE / 4)
+					samplePoints.push_back(GMT);
 				qt = GMT;
 				break;
-			
-			/*	colvec4 T;
-				T << t*t*t << t*t << t << 1;
-				rowvec4 Cx, Cy, Cz;
-				Cx << cp_pos_p1.x << cp_pos_p2.x << cp_pos_p3.x << cp_pos_p4.x;
-				Cy << cp_pos_p1.y << cp_pos_p2.y << cp_pos_p3.y << cp_pos_p4.y;
-				Cz << cp_pos_p1.z << cp_pos_p2.z << cp_pos_p3.z << cp_pos_p4.z;
-				colvec3 ResX = Cx * 1.0 / 2.0 * MatCard * T;
-				colvec3 ResY = Cy * 1.0 / 2.0 * MatCard * T;
-				colvec3 ResZ = Cz * 1.0 / 2.0 * MatCard * T;
-		
-				qt.x = ResX(0,0);
-				qt.y = ResY(0,0);
-				qt.z = ResZ(0,0);*/
-
+				//colvec4 T;
+				//T << t*t*t << t*t << t << 1;
+				//rowvec4 Cx, Cy, Cz;
+				//Cx << cp_pos_p1.x << cp_pos_p2.x << cp_pos_p3.x << cp_pos_p4.x;
+				//Cy << cp_pos_p1.y << cp_pos_p2.y << cp_pos_p3.y << cp_pos_p4.y;
+				//Cz << cp_pos_p1.z << cp_pos_p2.z << cp_pos_p3.z << cp_pos_p4.z;
+				//colvec3 ResX = Cx * 1.0 / 2.0 * MatCard * T;
+				//colvec3 ResY = Cy * 1.0 / 2.0 * MatCard * T;
+				//colvec3 ResZ = Cz * 1.0 / 2.0 * MatCard * T;
+				//qt.x = ResX(0,0);
+				//qt.y = ResY(0,0);
+				//qt.z = ResZ(0,0);
 				//mat U = Cx * MatCard * T;
 				//Res << vec4(cp_pos_p1.x, cp_pos_p2.x, cp_pos_p3.x, cp_pos_p4.x) * MatCard * T
 				//	<< 1 
 				//	<< 1;
-
-				/*glm::vec4 T = glm::vec4(t*t*t, t*t, t, 1);
-				glm::vec4 Gx = glm::vec4(cp_pos_p1.x, cp_pos_p2.x, cp_pos_p3.x, cp_pos_p4.x);
-				glm::vec4 kk = glm::vec4(Gx * MatCardinal * T,0.1,0.5,0.5);*/
+				//glm::vec4 T = glm::vec4(t*t*t, t*t, t, 1);
+				//glm::vec4 Gx = glm::vec4(cp_pos_p1.x, cp_pos_p2.x, cp_pos_p3.x, cp_pos_p4.x);
+				//glm::vec4 kk = glm::vec4(Gx * MatCardinal * T,0.1,0.5,0.5);
 				//glm::vec3 tmp = glm::vec3(
 				//	glm::vec4(cp_pos_p1.x, cp_pos_p2.x, cp_pos_p3.x, cp_pos_p4.x) * MatCardinal * T,
 				//	glm::vec4(cp_pos_p1.y, cp_pos_p2.y, cp_pos_p3.y, cp_pos_p4.y) * MatCardinal * T,
@@ -425,8 +422,6 @@ void TrainView::drawTrack(bool doingShadows)
 			default:
 				break;
 			}
-
-
 		}
 	}
 }
@@ -434,9 +429,9 @@ void TrainView::drawTrack(bool doingShadows)
 void TrainView::drawTrain(float t, bool doingShadows)
 {
 	spline_t type_spline = (spline_t)curve;
-	t *= m_pTrack->points.size();
+	float Lt = t * m_pTrack->points.size();
 	size_t i;
-	for (i = 0; t > 1; t -= 1)
+	for (i = 0; Lt > 1; Lt -= 1)
 		i++;
 
 	// pos
@@ -449,26 +444,27 @@ void TrainView::drawTrain(float t, bool doingShadows)
 	switch (type_spline){
 	case spline_Linear:
 		// Linear
-		qt0 = (1 - (t - 0.01)) * cp_pos_p1 + t * cp_pos_p2;
-		qt = (1 - t) * cp_pos_p1 + t * cp_pos_p2;
-		orient_t = (1 - t) * cp_orient_p1 + t * cp_orient_p2;
+		tt0 = (1 - (Lt - 0.01)) * cp_pos_p1 + (Lt - 0.01) * cp_pos_p2;
+		tt1 = (1 - Lt) * cp_pos_p1 + Lt * cp_pos_p2;
+		orient_t = (1 - Lt) * cp_orient_p1 + Lt * cp_orient_p2;
 		break; 
 	case spline_CardinalCubic:
-		break;
 	case spline_CubicB_Spline:
+		tt0 = samplePoints[floor(t * samplePoints.size()) - 1];
+		tt1 = samplePoints[floor(t * samplePoints.size())];
 		break; 
 	}
 
 	glColor3ub(255, 255, 255);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(qt.x - 5, qt.y - 5, qt.z - 5);
+	glVertex3f(tt1.x - 5, tt1.y - 5, tt1.z - 5);
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(qt.x + 5, qt.y - 5, qt.z - 5);
+	glVertex3f(tt1.x + 5, tt1.y - 5, tt1.z - 5);
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(qt.x + 5, qt.y + 5, qt.z - 5);
+	glVertex3f(tt1.x + 5, tt1.y + 5, tt1.z - 5);
 	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(qt.x - 5, qt.y + 5, qt.z - 5);
+	glVertex3f(tt1.x - 5, tt1.y + 5, tt1.z - 5);
 	glEnd();
 
 }

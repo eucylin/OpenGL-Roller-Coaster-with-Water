@@ -90,7 +90,8 @@ public:
 	//[Cloud_Lin]
 	float t_time = 0;
 	unsigned int DIVIDE_LINE = 1000;
-	Pnt3f qt, qt0, qt1, orient_t, cross_t;
+	Pnt3f qt, qt0, qt1, tt0, tt1, orient_t, cross_t;
+	vector<Pnt3f> samplePoints;
 
 	typedef enum{
 		spline_Linear = 0,
