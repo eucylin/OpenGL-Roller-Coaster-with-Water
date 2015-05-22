@@ -81,7 +81,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\glm;D:\OpenGL\freeglut\include;D:\Qt\5.4\msvc2012_opengl\include;D:\Qt\5.4\msvc2012_opengl\include\QtCore;D:\Qt\5.4\msvc2012_opengl\include\QtGui;D:\Qt\5.4\msvc2012_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\armadillo-5.100.2\include;D:\OpenGL\freeglut\include;D:\Qt\5.4\msvc2012_opengl\include;D:\Qt\5.4\msvc2012_opengl\include\QtCore;D:\Qt\5.4\msvc2012_opengl\include\QtGui;D:\Qt\5.4\msvc2012_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>

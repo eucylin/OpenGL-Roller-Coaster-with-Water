@@ -4,6 +4,8 @@
 #include <QtGui/QtGui>  
 #include <QtOpenGL/QtOpenGL>  
 #include <GL/freeglut.h>
+#include <iostream>
+#include <vector>
 #pragma comment(lib,"opengl32.lib")
 #pragma comment(lib,"glu32.lib") 
 #include "Utilities/ArcBallCam.H"
@@ -16,6 +18,14 @@
 #include "Load3DModel/3DSLoader.h"
 #include "Load3DModel/CbmpLoader.h"
 #include "Load3DModel/vector.h"
+
+//#include "glm/glm.hpp"
+//#include "glm/gtc/matrix_transform.hpp"
+//#include "glm/gtc/type_ptr.hpp"
+#include "armadillo"
+using namespace std;
+using namespace arma;
+
 class AppMain;
 class CTrack;
 
@@ -80,6 +90,7 @@ public:
 	//[Cloud_Lin]
 	float t_time = 0;
 	unsigned int DIVIDE_LINE = 1000;
+	Pnt3f qt, qt0, qt1, orient_t, cross_t;
 
 	typedef enum{
 		spline_Linear = 0,
@@ -87,8 +98,23 @@ public:
 		spline_CubicB_Spline = 2
 	} spline_t;
 
+	enum track_t{
+		Line = 0,
+		Track = 1,
+		Road = 2
+	};
+
 	Model *Mobj;
 	C3DSLoader M3ds;
+
+	/*float MatCardinal[4][4];*/
+	/*mat MatCard = mat(4, 4);*/
+
+	//glm::mat4 MatCardinal = glm::mat4
+	//	(-1, 3, -3, 1,
+	//	2, -5, 4, -1,
+	//	-1, 0, 1, 0,
+	//	0, 2, 0, 0);
 
 };  
 #endif // TRAINVIEW_H  

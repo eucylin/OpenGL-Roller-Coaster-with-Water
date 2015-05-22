@@ -7,12 +7,25 @@
 #include "Load3DModel/CbmpLoader.h"
 #include "Load3DModel/vector.h"
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+//#include "glm/glm.hpp"
+//#include "glm/gtc/matrix_transform.hpp"
+//#include "glm/gtc/type_ptr.hpp"
+#include "armadillo"
+
+#include <cmath>
+#include <algorithm>
+
+using namespace std;
+using namespace arma;
 
 TrainView::TrainView(QWidget *parent) :  
 QGLWidget(parent)  
-{  
+{
+	//MatCard << -1 << 2 << -1 << 0 << endr
+	//	<< 3 << -5 << 0 << 2 << endr
+	//	<< -3 << 4 << 1 << 0 << endr
+	//	<< 1 << -1 << 0 << 0 << endr;
+
 	resetArcball();
 }  
 TrainView::~TrainView()  
@@ -171,7 +184,18 @@ setProjection()
 		glLoadIdentity();
 		glRotatef(-90,1,0,0);
 		update();
-	} 
+	}
+	else if (this->camera == 2){
+		glMatrixMode(GL_PROJECTION);
+		gluPerspective(120, 1, 1, 200); glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		qt0.normalize();
+		qt.normalize();
+		gluLookAt(qt0.x, qt0.y + 5, qt0.z,
+			qt.x, qt.y + 5, qt.z,
+			orient_t.x, orient_t.y + 5, orient_t.z);
+		update();
+	}
 	// Or do the train view or other view here
 	//####################################################################
 	// TODO: 
@@ -221,7 +245,7 @@ void TrainView::drawStuff(bool doingShadows)
 	// TODO: 
 	// call your own track drawing code
 	//####################################################################
-
+	Mobj->render(false, false);
 	drawTrack(doingShadows);
 
 #ifdef EXAMPLE_SOLUTION
@@ -232,7 +256,7 @@ void TrainView::drawStuff(bool doingShadows)
 	// TODO: 
 	//	call your own train drawing code
 	//####################################################################
-	Mobj->render(false, false);
+	
 	/*M3ds.Draw();*/
 	drawTrain(t_time, doingShadows);
 
@@ -243,25 +267,54 @@ void TrainView::drawStuff(bool doingShadows)
 #endif
 }
 
+float MatCardinal[4][4] =
+{
+	{ -1 / 2.0, 2 / 2.0, -1 / 2.0, 0 },
+	{ 3 / 2.0, -5 / 2.0, 0, 2 / 2.0 },
+	{ -3 / 2.0, 4 / 2.0, 1 / 2.0, 0 },
+	{ 1 / 2.0, -1 / 2.0, 0, 0 }
+	};
+float MatBspline[4][4] =
+{
+	{ -1 / 6.0, 3 / 6.0, -3 / 6.0, 1 / 6.0 },
+	{ 3 / 6.0, -6 / 6.0, 0, 4 / 6.0 },
+	{ -3 / 6.0, 3 / 6.0, 3 / 6.0, 1 / 6.0 },
+	{ 1 / 6.0 ,0,0,0}
+};
 void TrainView::drawTrack(bool doingShadows)
 {
+	track_t type_track = (track_t)track;
 	spline_t type_spline = (spline_t)curve;
 	for (size_t i = 0; i < m_pTrack->points.size(); ++i)
 	{
 		// pos
 		Pnt3f cp_pos_p1 = m_pTrack->points[i].pos;
 		Pnt3f cp_pos_p2 = m_pTrack->points[(i + 1) % m_pTrack->points.size()].pos;
+		Pnt3f cp_pos_p3 = m_pTrack->points[(i + 2) % m_pTrack->points.size()].pos;
+		Pnt3f cp_pos_p4 = m_pTrack->points[(i + 3) % m_pTrack->points.size()].pos;
+
+		Pnt3f cp_pos[4] = { cp_pos_p1 = m_pTrack->points[i].pos,
+			cp_pos_p2 = m_pTrack->points[(i + 1) % m_pTrack->points.size()].pos, 
+			cp_pos_p3 = m_pTrack->points[(i + 2) % m_pTrack->points.size()].pos,
+			cp_pos_p4 = m_pTrack->points[(i + 3) % m_pTrack->points.size()].pos
+		};
 		// orient
 		Pnt3f cp_orient_p1 = m_pTrack->points[i].orient;
 		Pnt3f cp_orient_p2 = m_pTrack->points[(i + 1) % m_pTrack->points.size()].orient;
 
-		Pnt3f qt = cp_pos_p1, qt0, qt1, orient_t, cross_t;
+		qt = cp_pos_p1;
 		float percent = 1.0f / DIVIDE_LINE;
 		float t = 0;
 		for (size_t j = 0; j < DIVIDE_LINE; j++){
 			qt0 = qt;
 			switch (type_spline){
 			case spline_Linear:
+				orient_t = (1 - t) * cp_orient_p1 + t * cp_orient_p2;
+				break;
+			case spline_CardinalCubic:
+				orient_t = (1 - t) * cp_orient_p1 + t * cp_orient_p2;
+				break;
+			case spline_CubicB_Spline:
 				orient_t = (1 - t) * cp_orient_p1 + t * cp_orient_p2;
 				break;
 			}
@@ -271,41 +324,109 @@ void TrainView::drawTrack(bool doingShadows)
 			case spline_Linear:
 				qt = (1 - t) * cp_pos_p1 + t * cp_pos_p2;
 				break;
+			case spline_CardinalCubic:
+			case spline_CubicB_Spline:
+				float T[4] = {t*t*t, t*t, t, 1};
+				float MT[4] = { 0 };
+				Pnt3f GMT(0,0,0);
+				for (int i = 0; i < 4; i++){
+					for (int j = 0; j < 4; j++){
+						if (type_spline == spline_CardinalCubic)
+							MT[i] += MatCardinal[i][j] * T[j];
+						else if (type_spline == spline_CubicB_Spline)
+							MT[i] += MatBspline[i][j] * T[j];
+					}
+					GMT = GMT + cp_pos[i] * MT[i];
+				}
+				qt = GMT;
+				break;
+			
+			/*	colvec4 T;
+				T << t*t*t << t*t << t << 1;
+				rowvec4 Cx, Cy, Cz;
+				Cx << cp_pos_p1.x << cp_pos_p2.x << cp_pos_p3.x << cp_pos_p4.x;
+				Cy << cp_pos_p1.y << cp_pos_p2.y << cp_pos_p3.y << cp_pos_p4.y;
+				Cz << cp_pos_p1.z << cp_pos_p2.z << cp_pos_p3.z << cp_pos_p4.z;
+				colvec3 ResX = Cx * 1.0 / 2.0 * MatCard * T;
+				colvec3 ResY = Cy * 1.0 / 2.0 * MatCard * T;
+				colvec3 ResZ = Cz * 1.0 / 2.0 * MatCard * T;
+		
+				qt.x = ResX(0,0);
+				qt.y = ResY(0,0);
+				qt.z = ResZ(0,0);*/
+
+				//mat U = Cx * MatCard * T;
+				//Res << vec4(cp_pos_p1.x, cp_pos_p2.x, cp_pos_p3.x, cp_pos_p4.x) * MatCard * T
+				//	<< 1 
+				//	<< 1;
+
+				/*glm::vec4 T = glm::vec4(t*t*t, t*t, t, 1);
+				glm::vec4 Gx = glm::vec4(cp_pos_p1.x, cp_pos_p2.x, cp_pos_p3.x, cp_pos_p4.x);
+				glm::vec4 kk = glm::vec4(Gx * MatCardinal * T,0.1,0.5,0.5);*/
+				//glm::vec3 tmp = glm::vec3(
+				//	glm::vec4(cp_pos_p1.x, cp_pos_p2.x, cp_pos_p3.x, cp_pos_p4.x) * MatCardinal * T,
+				//	glm::vec4(cp_pos_p1.y, cp_pos_p2.y, cp_pos_p3.y, cp_pos_p4.y) * MatCardinal * T,
+				//	glm::vec4(cp_pos_p1.z, cp_pos_p2.z, cp_pos_p3.z, cp_pos_p4.z) * MatCardinal * T);
+				//qt.x = tmp.x; qt.y = tmp.y; qt.z = tmp.z;
 			}
 			qt1 = qt;
 
-			// cross
-			orient_t.normalize();
-			cross_t = (qt1 - qt0) * orient_t;
-			cross_t.normalize();
-			cross_t = cross_t * 2.5f;
-
-			glLineWidth(3);
-			glBegin(GL_LINES);
-			if (!doingShadows){
-				glColor3ub(32, 32, 64);
-			}
-			glVertex3f(qt0.x + cross_t.x, qt0.y + cross_t.y, qt0.z + cross_t.z);
-			glVertex3f(qt1.x + cross_t.x, qt1.y + cross_t.y, qt1.z + cross_t.z);
-
-			glVertex3f(qt0.x - cross_t.x, qt0.y - cross_t.y, qt0.z - cross_t.z);
-			glVertex3f(qt1.x - cross_t.x, qt1.y - cross_t.y, qt1.z - cross_t.z);
-
-			glEnd();
-			glLineWidth(1);
-
-			if ((int)(t * DIVIDE_LINE) % 100 == 1){
-				glLineWidth(50);
+			switch (type_track)
+			{
+			case TrainView::Line:
+				glLineWidth(10);
 				glBegin(GL_LINES);
 				if (!doingShadows){
-					glColor3ub(255, 255, 255);
+					glColor3ub(32, 32, 64);
+				}
+				glVertex3f(qt0.x, qt0.y, qt0.z);
+				glVertex3f(qt1.x, qt1.y, qt1.z);
+				glEnd();
+				glLineWidth(1);
+				break;
+			case TrainView::Track:
+				//Calculate cross
+				orient_t.normalize();
+				cross_t = (qt1 - qt0) * orient_t;
+				cross_t.normalize();
+				cross_t = cross_t * 2.5f;
+
+				//draw two parallel track
+				glLineWidth(3);
+				glBegin(GL_LINES);
+				if (!doingShadows){
+					glColor3ub(0, 0, 0);
 				}
 				glVertex3f(qt0.x + cross_t.x, qt0.y + cross_t.y, qt0.z + cross_t.z);
+				glVertex3f(qt1.x + cross_t.x, qt1.y + cross_t.y, qt1.z + cross_t.z);
+
 				glVertex3f(qt0.x - cross_t.x, qt0.y - cross_t.y, qt0.z - cross_t.z);
+				glVertex3f(qt1.x - cross_t.x, qt1.y - cross_t.y, qt1.z - cross_t.z);
 
 				glEnd();
 				glLineWidth(1);
+
+				//Draw crosstie
+				if ((int)(t * DIVIDE_LINE) % 100 == 1){
+					glLineWidth(50);
+					glBegin(GL_LINES);
+					if (!doingShadows){
+						glColor3ub(255, 204, 0);
+					}
+					glVertex3f(qt0.x + cross_t.x, qt0.y + cross_t.y, qt0.z + cross_t.z);
+					glVertex3f(qt0.x - cross_t.x, qt0.y - cross_t.y, qt0.z - cross_t.z);
+
+					glEnd();
+					glLineWidth(1);
+				}
+				break;
+			case TrainView::Road:
+				break;
+			default:
+				break;
 			}
+
+
 		}
 	}
 }
@@ -324,16 +445,18 @@ void TrainView::drawTrain(float t, bool doingShadows)
 	// orient
 	Pnt3f cp_orient_p1 = m_pTrack->points[i].orient;
 	Pnt3f cp_orient_p2 = m_pTrack->points[(i + 1) % m_pTrack->points.size()].orient;
-
-	Pnt3f qt = cp_pos_p1, orient_t;
-
 		
 	switch (type_spline){
 	case spline_Linear:
 		// Linear
+		qt0 = (1 - (t - 0.01)) * cp_pos_p1 + t * cp_pos_p2;
 		qt = (1 - t) * cp_pos_p1 + t * cp_pos_p2;
 		orient_t = (1 - t) * cp_orient_p1 + t * cp_orient_p2;
+		break; 
+	case spline_CardinalCubic:
 		break;
+	case spline_CubicB_Spline:
+		break; 
 	}
 
 	glColor3ub(255, 255, 255);
