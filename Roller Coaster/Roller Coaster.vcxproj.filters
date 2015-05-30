@@ -98,6 +98,9 @@
     <ClCompile Include="Src\Load3DModel\vector.cpp">
       <Filter>Source Files\Load3DModel</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Load3DModel\TGATexture.cpp">
+      <Filter>Source Files\Load3DModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AppMain.ui">
@@ -145,6 +148,9 @@
       <Filter>Header Files\Load3DModel</Filter>
     </ClInclude>
     <ClInclude Include="Include\Load3DModel\vector.h">
+      <Filter>Header Files\Load3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Load3DModel\TGATexture.h">
       <Filter>Header Files\Load3DModel</Filter>
     </ClInclude>
   </ItemGroup>

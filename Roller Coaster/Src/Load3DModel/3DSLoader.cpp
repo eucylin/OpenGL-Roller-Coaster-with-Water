@@ -1,5 +1,8 @@
+#include <QtGui/QtGui> 
 #include "Load3DModel/3DSLoader.h"   
-#include "Load3DModel/CBMPLoader.h"   
+#include "Load3DModel/CBMPLoader.h"
+#include "Load3DModel/vector.h"
+#include <string>
 
 C3DSLoader::C3DSLoader()   
 {   
@@ -33,19 +36,20 @@ void C3DSLoader::Init(char *filename)
 
 	for(int i =0; i<m_3DModel.numOfMaterials;i++)   
 	{    
-		if(strlen(m_3DModel.pMaterials[i].strFile)>0)                 
-			LoadTexture(m_3DModel.pMaterials[i].strFile,m_textures, i);          
+		if (strlen(m_3DModel.pMaterials[i].strFile) > 0){
+			LoadTexture(m_3DModel.pMaterials[i].strFile, m_textures, i);
+		}
 
 		   
 		m_3DModel.pMaterials[i].texureId = i;                        
 	}    
-}   
+}
 
-void C3DSLoader::Draw()    
-{   
+void C3DSLoader::Draw(Pnt3f pos0,Pnt3f pos1, Pnt3f orient, float scale)    
+{
+	orient.normalize();
 	glPushAttrib(GL_CURRENT_BIT);   
 	glDisable(GL_TEXTURE_2D);   
-
 	for(int i = 0; i < m_3DModel.numOfObjects; i++)   
 	{   
 		if(m_3DModel.pObject.size() <= 0)    
@@ -84,11 +88,13 @@ void C3DSLoader::Draw()
 					BYTE *pColor = m_3DModel.pMaterials[pObject->materialID].color;   
 					glColor3ub(pColor[0],pColor[1],pColor[2]);   
 				}   
-			}   
-			glVertex3f(pObject->pVerts[index].y,pObject->pVerts[index].z,pObject->pVerts[index].x);   
+			}
+			glRotatef(-150, 0,1,0);
+			glVertex3f(pObject->pVerts[index].x + pos0.x, pObject->pVerts[index].y + pos0.y, pObject->pVerts[index].z + pos0.z);	
 		}   
 		}   
-		glEnd();   
+		glEnd();
+
 	}   
 	glEnable(GL_TEXTURE_2D);   
 
@@ -101,10 +107,11 @@ void C3DSLoader::LoadTexture(char* filename, GLuint textureArray[], GLuint textu
 	if(!filename)   
 		return;   
 
-	if(!m_BMPTexture.LoadBitmap(filename))   
-	{   
-		exit(0);   
-	}   
+	if (!m_BMPTexture.LoadBitmap(filename))
+	{
+		qDebug() << "Error occured when loading 3DS Texture";
+		//exit(0);
+	}
 	glGenTextures(1,&m_textures[textureID]);   
 
 	glPixelStorei (GL_UNPACK_ALIGNMENT, 1);   

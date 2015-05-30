@@ -81,7 +81,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\armadillo-5.100.2\include;D:\OpenGL\freeglut\include;D:\Qt\5.4\msvc2012_opengl\include;D:\Qt\5.4\msvc2012_opengl\include\QtCore;D:\Qt\5.4\msvc2012_opengl\include\QtGui;D:\Qt\5.4\msvc2012_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\opencv\build\include;.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\armadillo-5.100.2\include;D:\OpenGL\freeglut\include;D:\Qt\5.4\msvc2012_opengl\include;D:\Qt\5.4\msvc2012_opengl\include\QtCore;D:\Qt\5.4\msvc2012_opengl\include\QtGui;D:\Qt\5.4\msvc2012_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -94,8 +94,8 @@
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\OpenGL\freeglut\lib;D:\OpenGL\glut-3.7_Complied\lib;D:\Qt\5.4\msvc2012_opengl\lib;D:\OgreSDK_vc10_v1-8-1\lib\debug;D:\OgreSDK_vc10_v1-8-1\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\opencv\build\x86\vc12\lib\opencv_imgproc2411d.lib;D:\opencv\build\x86\vc12\lib\opencv_core2411d.lib;D:\opencv\build\x86\vc12\lib\opencv_highgui2411d.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\opencv\build\x86\vc12\lib;D:\OpenGL\freeglut\lib;D:\OpenGL\glut-3.7_Complied\lib;D:\Qt\5.4\msvc2012_opengl\lib;D:\OgreSDK_vc10_v1-8-1\lib\debug;D:\OgreSDK_vc10_v1-8-1\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -188,6 +188,7 @@
     <ClCompile Include="Src\Load3DModel\3DSLoader.cpp" />
     <ClCompile Include="Src\Load3DModel\CBMPLoader.cpp" />
     <ClCompile Include="Src\Load3DModel\Model.cpp" />
+    <ClCompile Include="Src\Load3DModel\TGATexture.cpp" />
     <ClCompile Include="Src\Load3DModel\vector.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\Track.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="Include\Load3DModel\CbmpLoader.h" />
     <ClInclude Include="Include\Load3DModel\Model.h" />
     <ClInclude Include="Include\Load3DModel\point3d.h" />
+    <ClInclude Include="Include\Load3DModel\TGATexture.h" />
     <ClInclude Include="Include\Load3DModel\vector.h" />
     <ClInclude Include="Include\Track.H" />
     <CustomBuild Include="Include\TrainView.h">

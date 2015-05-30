@@ -1,5 +1,7 @@
 #include"Load3DModel/CBMPLoader.h"           
-
+#include <cstdio>
+#include <fstream>
+using namespace std;
 CBMPLoader::CBMPLoader()
 {
 	image = 0;
@@ -14,24 +16,29 @@ CBMPLoader::~CBMPLoader()
 
 bool CBMPLoader::LoadBitmap(const char *file)
 {
-	FILE *pFile = 0;
+	FILE *pFile;
 
 	BITMAPINFOHEADER bitmapInfoHeader;
 	BITMAPFILEHEADER header;
 
 	unsigned char textureColors = 0;
+	//FILE ** xFile;
+	//fopen_s(xFile,"myfile.txt", "r");
 
+	/*FILE *xFile = 0;
+	xFile = fopen("D:\\Users\\Chien-Hsuan\\Documents\\Visual Studio 2013\\Projects\\RollerCoaster\\Win32\\Debug\\NA1.bmp", "rb");
+	fstream fin;
+	fin.open(file,ios::in);*/
 	pFile = fopen(file, "rb");
-	if(pFile == 0)
+	if(pFile == NULL)
 		return false;
-
 	fread(&header, sizeof(BITMAPFILEHEADER), 1, pFile);
 
-	if(header.bfType != BITMAP_ID)
-	{
-		fclose(pFile);       
-		return false;
-	}
+	//if (header.bfType != BITMAP_ID)
+	//{
+	//	fclose(pFile);
+	//	return false;
+	//}
 
 	fread(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, pFile);
 

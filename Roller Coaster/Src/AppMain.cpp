@@ -4,6 +4,8 @@
 #include "Track.H"
 #include <math.h>
 #include <time.h>
+#include "QtMultimedia/QMediaPlayer"
+
 
 AppMain* AppMain::Instance = NULL;
 AppMain::AppMain(QWidget *parent)
@@ -292,15 +294,22 @@ void AppMain::ChangeTrackType( QString type )
 
 void AppMain::SwitchPlayAndPause()
 {
+	//QMediaPlayer* player;
+	//player = new QMediaPlayer;
+	//player->setMedia(QUrl(QUrl::fromLocalFile("Old_MacDonald_(Instrumental).mp3")));
 	if( !this->trainview->isrun )
 	{
 		ui.bPlay->setIcon(QIcon(":/AppMain/Resources/Icons/play.ico"));
 		this->trainview->isrun = !this->trainview->isrun;
+		/*player->setVolume(50);
+		player->play();
+*/
 	}
 	else
 	{
 		ui.bPlay->setIcon(QIcon(":/AppMain/Resources/Icons/pause.ico"));
 		this->trainview->isrun = !this->trainview->isrun;
+		/*player->pause();*/
 	}
 	
 }

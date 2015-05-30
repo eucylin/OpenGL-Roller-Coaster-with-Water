@@ -18,13 +18,14 @@
 #include "Load3DModel/3DSLoader.h"
 #include "Load3DModel/CbmpLoader.h"
 #include "Load3DModel/vector.h"
+#include "Load3DModel/TGATexture.h"
+
 
 //#include "glm/glm.hpp"
 //#include "glm/gtc/matrix_transform.hpp"
 //#include "glm/gtc/type_ptr.hpp"
-#include "armadillo"
+
 using namespace std;
-using namespace arma;
 
 class AppMain;
 class CTrack;
@@ -107,6 +108,9 @@ public:
 
 	Model *Mobj;
 	C3DSLoader M3ds;
+	Pnt3f modelPos0, modelPos1;
+	TextureImage texture[6];
+	TextureImage moonTex;
 
 	/*float MatCardinal[4][4];*/
 	/*mat MatCard = mat(4, 4);*/

@@ -6,6 +6,8 @@
 #include <math.h> 
 #include <vector>
 #include <GL/GLU.h>
+#include "Utilities/Pnt3f.H"
+#include <string>
 using namespace std;          
 
 #define PRIMARY       0x4D4D 
@@ -76,14 +78,14 @@ struct tChunk
 	unsigned int bytesRead;		
 }; 
 
-#define MAX_TEXTURES  100 
+#define MAX_TEXTURES  1000 
 
 class C3DSLoader 
 { 
 public: 
 	C3DSLoader();								 
 	virtual ~C3DSLoader(); 
-	void Draw();
+	void Draw(Pnt3f, Pnt3f, Pnt3f, float = 1);
 	void Init(char *filename); 
 
 private: 

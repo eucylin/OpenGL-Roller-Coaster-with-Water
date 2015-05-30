@@ -102,7 +102,7 @@ void drawCube(float x, float y, float z, float l)
 // the two colors for the floor for the check board
 //
 //*************************************************************************
-float floorColor1[3] = { .7f, .7f, .7f }; // Light color
+float floorColor1[3] = { .9f, .9f, .9f }; // Light color
 float floorColor2[3] = { .3f, .3f, .3f }; // Dark color
 
 //*************************************************************************
