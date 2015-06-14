@@ -37,7 +37,7 @@ class CTrack;
 //#######################################################################
 
 
-class TrainView : public QGLWidget  
+class TrainView : public QGLWidget,public QGLView  
 {  
 	Q_OBJECT  
 public:  

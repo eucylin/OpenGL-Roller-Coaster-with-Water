@@ -1,4 +1,5 @@
-#include "Load3DModel/vector.h"                      
+#include "Load3DModel/vector.h"
+
 inline float Vector3::length()   
 {   
 	return (float)( x * x + y * y + z * z );   

@@ -80,8 +80,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\opencv\build\include;.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\armadillo-5.100.2\include;D:\OpenGL\freeglut\include;D:\Qt\5.4\msvc2012_opengl\include;D:\Qt\5.4\msvc2012_opengl\include\QtCore;D:\Qt\5.4\msvc2012_opengl\include\QtGui;D:\Qt\5.4\msvc2012_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_OPENGL_LIB;QT_MULTIMEDIA_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\opencv\build\include;.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\armadillo-5.100.2\include;D:\OpenGL\freeglut\include;D:\Qt\Qt5.5.0\5.5\msvc2013\include;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtCore;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtGui;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtMultimedia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -94,14 +94,14 @@
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D:\opencv\build\x86\vc12\lib\opencv_imgproc2411d.lib;D:\opencv\build\x86\vc12\lib\opencv_core2411d.lib;D:\opencv\build\x86\vc12\lib\opencv_highgui2411d.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\opencv\build\x86\vc12\lib;D:\OpenGL\freeglut\lib;D:\OpenGL\glut-3.7_Complied\lib;D:\Qt\5.4\msvc2012_opengl\lib;D:\OgreSDK_vc10_v1-8-1\lib\debug;D:\OgreSDK_vc10_v1-8-1\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;opengl32.lib;glu32.lib;Qt5Multimediad.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\opencv\build\x86\vc12\lib;D:\OpenGL\freeglut\lib;D:\OpenGL\glut-3.7_Complied\lib;D:\Qt\Qt5.5.0\5.5\msvc2013\lib;D:\OgreSDK_vc10_v1-8-1\lib\debug;D:\OgreSDK_vc10_v1-8-1\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\freeglut\include;D:\Qt\5.4\msvc2012_opengl\include;D:\Qt\5.4\msvc2012_opengl\include\QtCore;D:\Qt\5.4\msvc2012_opengl\include\QtGui;D:\Qt\5.4\msvc2012_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64;QT_OPENGL_LIB;QT_MULTIMEDIA_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\freeglut\include;D:\Qt\5.4\msvc2012_opengl\include;D:\Qt\5.4\msvc2012_opengl\include\QtCore;D:\Qt\5.4\msvc2012_opengl\include\QtGui;D:\Qt\5.4\msvc2012_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtMultimedia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -115,15 +115,15 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>D:\OpenGL\freeglut\lib;D:\OpenGL\glut-3.7_Complied\lib;D:\Qt\5.4\msvc2012_opengl\lib;D:\OgreSDK_vc10_v1-8-1\lib\debug;D:\OgreSDK_vc10_v1-8-1\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>freeglut.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;opengl32.lib;glu32.lib;Qt5Multimediad.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtCore;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtGui;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CONSOLE;QT_OPENGL_LIB;QT_MULTIMEDIA_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtCore;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtGui;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtMultimedia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -134,13 +134,13 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Multimedia.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PreprocessorDefinitions>_CONSOLE;NDEBUG;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_NO_DEBUG;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtCore;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtGui;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CONSOLE;NDEBUG;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_NO_DEBUG;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64;QT_OPENGL_LIB;QT_MULTIMEDIA_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtCore;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtGui;C:\Qt\Qt5.2.0\5.2.0\msvc2010_opengl\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtMultimedia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -151,7 +151,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Multimedia.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
     </Link>
@@ -295,7 +295,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2012_opengl" Qt5Version_x0020_x64="msvc2013_64" MocOptions="" />
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2013" Qt5Version_x0020_x64="msvc2013_64" MocOptions="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
