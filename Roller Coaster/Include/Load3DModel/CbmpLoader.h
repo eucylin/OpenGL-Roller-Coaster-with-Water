@@ -3,7 +3,7 @@
 
 #define BITMAP_ID 0x4D42
 
-#include <cstdio>
+#include <stdio.h>
 #include <iostream>
 #include <fstream>
 #include <windows.h>

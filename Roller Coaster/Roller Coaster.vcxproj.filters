@@ -45,6 +45,9 @@
     <Filter Include="Source Files\Load3DModel">
       <UniqueIdentifier>{0e9fc421-311d-403a-b67d-10b7c5f9fda4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Shader">
+      <UniqueIdentifier>{7e8cfb1c-ddcc-418d-a305-39815800f30d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_AppMain.cpp">
@@ -101,6 +104,9 @@
     <ClCompile Include="Src\Load3DModel\TGATexture.cpp">
       <Filter>Source Files\Load3DModel</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Shader\Shader_Loader.cpp">
+      <Filter>Header Files\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="AppMain.ui">
@@ -153,5 +159,19 @@
     <ClInclude Include="Include\Load3DModel\TGATexture.h">
       <Filter>Header Files\Load3DModel</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Shader\SimpleShaderHandler.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Shader\Shader_Loader.h">
+      <Filter>Header Files\Shader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Include\Shader\fragment.frag">
+      <Filter>Header Files\Shader</Filter>
+    </None>
+    <None Include="Include\Shader\vertex.vs">
+      <Filter>Header Files\Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

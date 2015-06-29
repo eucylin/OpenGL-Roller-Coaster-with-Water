@@ -47,7 +47,16 @@ void C3DSLoader::Init(char *filename)
 
 void C3DSLoader::Draw(Pnt3f pos0,Pnt3f pos1, Pnt3f orient, float scale)    
 {
+	Pnt3f originalGazePos(-pos0.x,-pos0.y,-pos0.z);
+	Pnt3f newGazePos(pos1.x-pos0.x,pos1.y-pos0.y,pos1.z-pos0.z);
+	originalGazePos.normalize();
+	newGazePos.normalize();
 	orient.normalize();
+	float productValue = originalGazePos.x * newGazePos.x + originalGazePos.y * newGazePos.y + originalGazePos.z * newGazePos.z;
+	float cosValue = productValue / 1;
+	float angle = acos(cosValue) * 180 / M_PI;
+	//glPushMatrix();
+	//glRotatef(angle, 0,1,0);
 	glPushAttrib(GL_CURRENT_BIT);   
 	glDisable(GL_TEXTURE_2D);   
 	for(int i = 0; i < m_3DModel.numOfObjects; i++)   
@@ -66,7 +75,6 @@ void C3DSLoader::Draw(Pnt3f pos0,Pnt3f pos1, Pnt3f orient, float scale)
 			glDisable(GL_TEXTURE_2D);               
 
 		glColor3ub(255, 255, 255);   
-
 		glBegin(GL_TRIANGLES);   
 		for(int j = 0; j < pObject->numOfFaces; j++)    
 		{for(int tex = 0; tex < 3; tex++)                    
@@ -89,7 +97,8 @@ void C3DSLoader::Draw(Pnt3f pos0,Pnt3f pos1, Pnt3f orient, float scale)
 					glColor3ub(pColor[0],pColor[1],pColor[2]);   
 				}   
 			}
-			glRotatef(-150, 0,1,0);
+			
+			//gluLookAt(pos0.x, pos0.y, pos0.z, pos1.x, pos1.y, pos1.z, 0, 1, 0);
 			glVertex3f(pObject->pVerts[index].x + pos0.x, pObject->pVerts[index].y + pos0.y, pObject->pVerts[index].z + pos0.z);	
 		}   
 		}   
@@ -99,6 +108,8 @@ void C3DSLoader::Draw(Pnt3f pos0,Pnt3f pos1, Pnt3f orient, float scale)
 	glEnable(GL_TEXTURE_2D);   
 
 	glPopAttrib();   
+
+	//glPopMatrix();
 }   
 
 void C3DSLoader::LoadTexture(char* filename, GLuint textureArray[], GLuint textureID)   

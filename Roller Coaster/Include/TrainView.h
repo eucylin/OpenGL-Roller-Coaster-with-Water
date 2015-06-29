@@ -3,7 +3,7 @@
 #include <QtOpenGL/QGLWidget>  
 #include <QtGui/QtGui>  
 #include <QtOpenGL/QtOpenGL>  
-#include <GL/freeglut.h>
+//#include <GL/freeglut.h>
 #include <iostream>
 #include <vector>
 #pragma comment(lib,"opengl32.lib")
@@ -37,14 +37,18 @@ class CTrack;
 //#######################################################################
 
 
-class TrainView : public QGLWidget,public QGLView  
+class TrainView : public QGLWidget, protected QOpenGLFunctions
 {  
 	Q_OBJECT  
 public:  
 	explicit TrainView(QWidget *parent = 0);  
 	~TrainView();  
+	enum eSkyBox{
+		blood = 0
+	};
 
 public:
+	virtual void initializeGL();
 	// overrides of important window things
 	//virtual int handle(int);
 	virtual void paintGL();
@@ -76,6 +80,9 @@ public:
 	void RenderObj(){
 		Mobj->render(true, true);
 	}
+
+	void readSkyBox(eSkyBox skyBoxName = eSkyBox::blood);
+	void drawSkyBox(eSkyBox skyBoxName = eSkyBox::blood);
 
 public:
 	ArcBallCam		arcball;			// keep an ArcBall for the UI
@@ -111,6 +118,7 @@ public:
 	Pnt3f modelPos0, modelPos1;
 	TextureImage texture[6];
 	TextureImage moonTex;
+	GLuint program1;
 
 	/*float MatCardinal[4][4];*/
 	/*mat MatCard = mat(4, 4);*/

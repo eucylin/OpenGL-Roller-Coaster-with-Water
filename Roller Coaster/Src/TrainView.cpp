@@ -1,15 +1,15 @@
-﻿
-#include "opencv/cv.h"
+﻿#include "opencv/cv.h"
 #include "opencv/highgui.h"
+
+//#include "Shader/SimpleShaderHandler.h"
+#include "Shader/Shader_Loader.h"
 
 #include "TrainView.h"  
 #include "Load3DModel/TGATexture.h"  
 
-#include "Load3DModel/Model.h"
 #include "Load3DModel/point3d.h"
 
 #include "Load3DModel/3DSLoader.h"
-#include "Load3DModel/CbmpLoader.h"
 #include "Load3DModel/vector.h"
 #include "Utilities/ArcBallCam.H"
 #include <string>
@@ -37,7 +37,34 @@ QGLWidget(parent)
 TrainView::~TrainView()  
 {}  
 
-void TrainView:: resetArcball()
+void TrainView::initializeGL()
+{
+	initializeOpenGLFunctions();
+	glEnable(GL_DEPTH_TEST);
+	GLenum err = glewInit();
+	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
+
+	Core::Shader_Loader shaderLoader1;
+	program1 = shaderLoader1.CreateProgram("Vertex_Shader.glsl", "Fragment_Shader.glsl");
+	//initShader("vertex.vs", "fragment.frag");
+	readSkyBox(eSkyBox::blood);
+
+	/*Mobj = new Model("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/colony sector/colony sector.obj", 15.0,
+	Point3d(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z));*/
+	/*M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/ToyTrain/Toy Train.3ds");*/
+	modelPos0 = Pnt3f(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z);
+	//M3ds.Init("D:/Downloads/Little train/Small train.3ds");
+	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/GothamTrain/train.3DS");
+	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/CODMapShipment/Files/CODMapShipment.3ds");
+	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/old fashion town/old town block.3DS");
+	M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/Train3/Train3S.3DS");
+	//M3ds.Init("C:/Users/Chien-Hsuan/Desktop/Little_train/Small_train.3ds");
+	//CBMPLoader cmbp;
+	//cmbp.LoadBitmap("NA1.JPG");
+	LoadTGA(&moonTex, "Various0430_SO.tga");
+}
+
+void TrainView::resetArcball()
 	//========================================================================
 {
 	// Set up the camera to look at the world
@@ -49,41 +76,6 @@ void TrainView:: resetArcball()
 bool once = true;
 void TrainView::paintGL()
 {
-	//Init once
-	if (once){
-		once = false;
-		/*Mobj = new Model("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/colony sector/colony sector.obj", 15.0,
-			Point3d(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z));*/
-		
-		/*M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/ToyTrain/Toy Train.3ds");*/
-		modelPos0 = Pnt3f(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z);
-		//M3ds.Init("D:/Downloads/Little train/Small train.3ds");
-		//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/GothamTrain/train.3DS");
-		//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/CODMapShipment/Files/CODMapShipment.3ds");
-		//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/old fashion town/old town block.3DS");
-		M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/Train3/Train3S.3DS");
-		//CBMPLoader cmbp;
-		//cmbp.LoadBitmap("NA1.JPG");
-		GLuint _skybox[6];
-
-		vector<string> s_filename;
-		s_filename.push_back("blood_ft.tga");
-		s_filename.push_back("blood_lf.tga");
-		s_filename.push_back("blood_bk.tga");
-		s_filename.push_back("blood_rt.tga");
-		s_filename.push_back("blood_up.tga");
-		s_filename.push_back("blood_dn.tga");
-
-
-		for (int i = 0; i < 6; i++){
-			//char tmp[] = s_filename[i];
-			if (!LoadTGA(&texture[i], s_filename[i].c_str()))
-				qDebug() << "SHIT";
-		}
-
-		LoadTGA(&moonTex, "Various0430_SO.tga");
-	}
-
 	//*********************************************************************
 	//
 	// * Set up basic opengl informaiton
@@ -109,109 +101,6 @@ void TrainView::paintGL()
 	glLoadIdentity();
 	setProjection();		// put the code to set up matrices here
 
-	//SKYBOX
-
-	//for (int i = 0; i < 6; i++){
-	//	glGenTextures(1, &_skybox[i]);
-	//	glBindTexture(GL_TEXTURE_2D, _skybox[i]);
-	//	/*CBMPLoader m_image;
-	//	m_image.LoadBitmap(s_filename[i].c_str());*/
-	//	IplImage *m_image;
-	//	m_image = cvLoadImage(s_filename[i].c_str(), 1);
-	//	/*FILE *m_image = fopen("s_filename[i]", "rb");*/
-	//	glTexImage2D(GL_TEXTURE_2D,// 目标  
-	//		0,// 级别  
-	//		4,// 纹理内部格式  
-	//		512,// 纹理的宽（最好2的次方）  
-	//		512,// 纹理的高（最好2的次方）  
-	//		0,// 纹理的深度（最好2的次方）  
-	//		0x80E1,// 纹理单元格式（GL_BGRA=0x80E1）  
-	//		GL_UNSIGNED_BYTE,// 像素的数据类型  
-	//		m_image);// 数据指针  );
-	//	glEnable(GL_TEXTURE_2D);
-	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	//}
-
-	// Store the current matrix
-	/*glPushMatrix();
-	glLoadIdentity();*/
-	/*glTranslatef(arcball.eyeX, arcball.eyeY, arcball.eyeZ);*/
-	/*gluLookAt(
-		0, 0, 0,
-		arcball.eyeX, arcball.eyeY, arcball.eyeZ,
-		0, 1, 0);*/
-
-	// Enable/Disable features
-	//glPushAttrib(GL_ENABLE_BIT);
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_BLEND);
-
-	// Just in case we set all vertices to white.
-	glColor4f(1, 1, 1, 1);
-
-	// Render the front quad
-	glBindTexture(GL_TEXTURE_2D, texture[0].texID);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 0); glVertex3f(1500, -1500, -1500);
-	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, -1500);
-	glTexCoord2f(1, 1); glVertex3f(-1500, 1500, -1500);
-	glTexCoord2f(0, 1); glVertex3f(1500, 1500, -1500);
-	glEnd();
-
-	// Render the left quad
-	glBindTexture(GL_TEXTURE_2D, texture[1].texID);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 0); glVertex3f(1500, -1500, 1500);
-	glTexCoord2f(1, 0); glVertex3f(1500, -1500, -1500);
-	glTexCoord2f(1, 1); glVertex3f(1500, 1500, -1500);
-	glTexCoord2f(0, 1); glVertex3f(1500, 1500, 1500);
-	glEnd();
-
-	// Render the back quad
-	glBindTexture(GL_TEXTURE_2D, texture[2].texID);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, 1500);
-	glTexCoord2f(1, 0); glVertex3f(1500, -1500, 1500);
-	glTexCoord2f(1, 1); glVertex3f(1500, 1500, 1500);
-	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, 1500);
-
-	glEnd();
-
-	// Render the right quad
-	glBindTexture(GL_TEXTURE_2D, texture[3].texID);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
-	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, 1500);
-	glTexCoord2f(1, 1); glVertex3f(-1500, 1500, 1500);
-	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, -1500);
-	glEnd();
-
-	// Render the top quad
-	glBindTexture(GL_TEXTURE_2D, texture[4].texID);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, -1500);
-	glTexCoord2f(0, 0); glVertex3f(-1500, 1500, 1500);
-	glTexCoord2f(1, 0); glVertex3f(1500, 1500, 1500);
-	glTexCoord2f(1, 1); glVertex3f(1500, 1500, -1500);
-	glEnd();
-
-	// Render the bottom quad
-	glBindTexture(GL_TEXTURE_2D, texture[5].texID);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
-	glTexCoord2f(0, 1); glVertex3f(-1500, -1500, 1500);
-	glTexCoord2f(1, 1); glVertex3f(1500, -1500, 1500);
-	glTexCoord2f(1, 0); glVertex3f(1500, -1500, -1500);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-	
-	// Restore enable bits and matrix
-	//glPopAttrib();
-	/*glPopMatrix();*/
-	//Cloud
 
 	//######################################################################
 	// TODO: 
@@ -384,6 +273,8 @@ setProjection()
 
 void TrainView::drawStuff(bool doingShadows)
 {
+	drawSkyBox();
+
 	// Draw the control points
 	// don't draw the control points if you're driving 
 	// (otherwise you get sea-sick as you drive through them)
@@ -538,6 +429,7 @@ void TrainView::drawTrack(bool doingShadows)
 			}
 			qt1 = qt;
 
+			glUseProgram(program1);
 			switch (type_track)
 			{
 			case TrainView::Line:
@@ -592,6 +484,7 @@ void TrainView::drawTrack(bool doingShadows)
 			default:
 				break;
 			}
+			glUseProgram(0);
 		}
 	}
 }
@@ -639,7 +532,142 @@ void TrainView::drawTrain(float t, bool doingShadows)
 	modelPos0 = tt0;
 	modelPos1 = tt1;
 	/*Mobj->render();*/
-	M3ds.Draw(modelPos0, modelPos1, orient_t);
+	if (this->camera != 2)
+		M3ds.Draw(modelPos0, modelPos1, orient_t);
+}
+
+void TrainView::readSkyBox(eSkyBox skyBoxName)
+{
+	GLuint _skybox[6];
+	vector<string> s_filename;
+	s_filename.clear();
+
+	switch (skyBoxName)
+	{
+	case TrainView::blood:
+		s_filename.push_back("blood_ft.tga");
+		s_filename.push_back("blood_lf.tga");
+		s_filename.push_back("blood_bk.tga");
+		s_filename.push_back("blood_rt.tga");
+		s_filename.push_back("blood_up.tga");
+		s_filename.push_back("blood_dn.tga");
+		break;
+	default:
+		break;
+	}
+
+	for (int i = 0; i < 6; i++){
+		//char tmp[] = s_filename[i];
+		if (!LoadTGA(&texture[i], s_filename[i].c_str()))
+			qDebug() << "SHIT! Load Skybox Texture Failed";
+	}
+}
+
+void TrainView::drawSkyBox(eSkyBox skyBoxName)
+{
+	//SKYBOX
+
+	//for (int i = 0; i < 6; i++){
+	//	glGenTextures(1, &_skybox[i]);
+	//	glBindTexture(GL_TEXTURE_2D, _skybox[i]);
+	//	/*CBMPLoader m_image;
+	//	m_image.LoadBitmap(s_filename[i].c_str());*/
+	//	IplImage *m_image;
+	//	m_image = cvLoadImage(s_filename[i].c_str(), 1);
+	//	/*FILE *m_image = fopen("s_filename[i]", "rb");*/
+	//	glTexImage2D(GL_TEXTURE_2D,// 目标  
+	//		0,// 级别  
+	//		4,// 纹理内部格式  
+	//		512,// 纹理的宽（最好2的次方）  
+	//		512,// 纹理的高（最好2的次方）  
+	//		0,// 纹理的深度（最好2的次方）  
+	//		0x80E1,// 纹理单元格式（GL_BGRA=0x80E1）  
+	//		GL_UNSIGNED_BYTE,// 像素的数据类型  
+	//		m_image);// 数据指针  );
+	//	glEnable(GL_TEXTURE_2D);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	//}
+
+	// Store the current matrix
+	/*glPushMatrix();
+	glLoadIdentity();*/
+	/*glTranslatef(arcball.eyeX, arcball.eyeY, arcball.eyeZ);*/
+	/*gluLookAt(
+	0, 0, 0,
+	arcball.eyeX, arcball.eyeY, arcball.eyeZ,
+	0, 1, 0);*/
+
+	// Enable/Disable features
+	//glPushAttrib(GL_ENABLE_BIT);
+	glEnable(GL_TEXTURE_2D);
+	//glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_BLEND);
+
+	// Just in case we set all vertices to white.
+	glColor4f(1, 1, 1, 1);
+
+	// Render the front quad
+	glBindTexture(GL_TEXTURE_2D, texture[0].texID);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(1500, -1500, -1500);
+	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, -1500);
+	glTexCoord2f(1, 1); glVertex3f(-1500, 1500, -1500);
+	glTexCoord2f(0, 1); glVertex3f(1500, 1500, -1500);
+	glEnd();
+
+	// Render the left quad
+	glBindTexture(GL_TEXTURE_2D, texture[1].texID);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(1500, -1500, 1500);
+	glTexCoord2f(1, 0); glVertex3f(1500, -1500, -1500);
+	glTexCoord2f(1, 1); glVertex3f(1500, 1500, -1500);
+	glTexCoord2f(0, 1); glVertex3f(1500, 1500, 1500);
+	glEnd();
+
+	// Render the back quad
+	glBindTexture(GL_TEXTURE_2D, texture[2].texID);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, 1500);
+	glTexCoord2f(1, 0); glVertex3f(1500, -1500, 1500);
+	glTexCoord2f(1, 1); glVertex3f(1500, 1500, 1500);
+	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, 1500);
+
+	glEnd();
+
+	// Render the right quad
+	glBindTexture(GL_TEXTURE_2D, texture[3].texID);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
+	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, 1500);
+	glTexCoord2f(1, 1); glVertex3f(-1500, 1500, 1500);
+	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, -1500);
+	glEnd();
+
+	// Render the top quad
+	glBindTexture(GL_TEXTURE_2D, texture[4].texID);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, -1500);
+	glTexCoord2f(0, 0); glVertex3f(-1500, 1500, 1500);
+	glTexCoord2f(1, 0); glVertex3f(1500, 1500, 1500);
+	glTexCoord2f(1, 1); glVertex3f(1500, 1500, -1500);
+	glEnd();
+
+	// Render the bottom quad
+	glBindTexture(GL_TEXTURE_2D, texture[5].texID);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
+	glTexCoord2f(0, 1); glVertex3f(-1500, -1500, 1500);
+	glTexCoord2f(1, 1); glVertex3f(1500, -1500, 1500);
+	glTexCoord2f(1, 0); glVertex3f(1500, -1500, -1500);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+
+	// Restore enable bits and matrix
+	//glPopAttrib();
+	/*glPopMatrix();*/
+	//Cloud
 }
 
 void TrainView::
