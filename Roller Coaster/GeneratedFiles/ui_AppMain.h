@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'AppMain.ui'
+** Form generated from reading UI file 'AppMainh80708.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_APPMAIN_H
-#define UI_APPMAIN_H
+#ifndef APPMAINH80708_H
+#define APPMAINH80708_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -45,6 +45,7 @@ public:
     QAction *aLine;
     QAction *aTrack;
     QAction *aRoad;
+    QAction *actionBlood;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *mainLayout;
@@ -78,6 +79,7 @@ public:
     QMenu *menuCurve;
     QMenu *menuTrack;
     QMenu *menuVelocity;
+    QMenu *menuSkybox;
     QStatusBar *statusBar;
     QToolBar *mainToolBar;
 
@@ -85,7 +87,7 @@ public:
     {
         if (AppMainClass->objectName().isEmpty())
             AppMainClass->setObjectName(QStringLiteral("AppMainClass"));
-        AppMainClass->resize(1028, 769);
+        AppMainClass->resize(1032, 769);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -141,6 +143,8 @@ public:
         aRoad = new QAction(AppMainClass);
         aRoad->setObjectName(QStringLiteral("aRoad"));
         aRoad->setCheckable(true);
+        actionBlood = new QAction(AppMainClass);
+        actionBlood->setObjectName(QStringLiteral("actionBlood"));
         centralWidget = new QWidget(AppMainClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -547,7 +551,7 @@ public:
         AppMainClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(AppMainClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1028, 21));
+        menuBar->setGeometry(QRect(0, 0, 1032, 25));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuCamera = new QMenu(menuBar);
@@ -558,6 +562,8 @@ public:
         menuTrack->setObjectName(QStringLiteral("menuTrack"));
         menuVelocity = new QMenu(menuBar);
         menuVelocity->setObjectName(QStringLiteral("menuVelocity"));
+        menuSkybox = new QMenu(menuBar);
+        menuSkybox->setObjectName(QStringLiteral("menuSkybox"));
         AppMainClass->setMenuBar(menuBar);
         statusBar = new QStatusBar(AppMainClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -571,6 +577,7 @@ public:
         menuBar->addAction(menuTrack->menuAction());
         menuBar->addAction(menuCurve->menuAction());
         menuBar->addAction(menuVelocity->menuAction());
+        menuBar->addAction(menuSkybox->menuAction());
         menuFile->addAction(aLoadPath);
         menuFile->addAction(aSavePath);
         menuFile->addSeparator();
@@ -584,6 +591,7 @@ public:
         menuTrack->addAction(aLine);
         menuTrack->addAction(aTrack);
         menuTrack->addAction(aRoad);
+        menuSkybox->addAction(actionBlood);
         mainToolBar->addAction(aLoadPath);
         mainToolBar->addAction(aSavePath);
 
@@ -607,6 +615,7 @@ public:
         aLine->setText(QApplication::translate("AppMainClass", "Line", 0));
         aTrack->setText(QApplication::translate("AppMainClass", "Track", 0));
         aRoad->setText(QApplication::translate("AppMainClass", "Road", 0));
+        actionBlood->setText(QApplication::translate("AppMainClass", "blood", 0));
         groupCamera->setTitle(QApplication::translate("AppMainClass", "Camera", 0));
         comboCamera->clear();
         comboCamera->insertItems(0, QStringList()
@@ -644,6 +653,7 @@ public:
         menuCurve->setTitle(QApplication::translate("AppMainClass", "Curve", 0));
         menuTrack->setTitle(QApplication::translate("AppMainClass", "Track", 0));
         menuVelocity->setTitle(QApplication::translate("AppMainClass", "Velocity", 0));
+        menuSkybox->setTitle(QApplication::translate("AppMainClass", "Skybox", 0));
     } // retranslateUi
 
 };
@@ -654,4 +664,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_APPMAIN_H
+#endif // APPMAINH80708_H

@@ -76,6 +76,10 @@ private:
 		void ChangeTrackToTrack();
 		void ChangeTrackToRoad();
 
+		/*		Cloud_Lin		*/
+		void ChangeSkyboxToBlood();
+		/*		Cloud_Lin		*/
+
 		void SwitchPlayAndPause();
 		void ChangeSpeedOfTrain( int val );
 

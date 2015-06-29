@@ -46,6 +46,8 @@ AppMain::AppMain(QWidget *parent)
 	connect( ui.aTrack		,SIGNAL(triggered()),this,SLOT(ChangeTrackToTrack())	);
 	connect( ui.aRoad		,SIGNAL(triggered()),this,SLOT(ChangeTrackToRoad())		);
 
+	connect(ui.actionBlood, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToBlood())	);
+
 	connect( ui.bPlay		,SIGNAL(clicked()),this,SLOT(SwitchPlayAndPause())				);
 	connect( ui.sSpeed		,SIGNAL(valueChanged(int)),this,SLOT(ChangeSpeedOfTrain(int))	);
 	connect( ui.bAdd		,SIGNAL(clicked()),this,SLOT(AddControlPoint())					);
@@ -451,7 +453,12 @@ void AppMain::ChangeTrackToRoad()
 	this->trainview->track = 2;
 }
 
-void AppMain::UpdateCameraState( int index )
+void AppMain::ChangeSkyboxToBlood()
+{
+	this->trainview->readSkyBox(TrainView::blood);
+}
+
+void AppMain::UpdateCameraState(int index)
 {
 	ui.aWorld->setChecked( (index==0)?true:false );
 	ui.aTop	 ->setChecked( (index==1)?true:false );

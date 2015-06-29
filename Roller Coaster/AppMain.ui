@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1028</width>
+    <width>1032</width>
     <height>769</height>
    </rect>
   </property>
@@ -1048,8 +1048,8 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1028</width>
-     <height>21</height>
+     <width>1032</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1090,11 +1090,18 @@ QPushButton:pressed {
      <string>Velocity</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuSkybox">
+    <property name="title">
+     <string>Skybox</string>
+    </property>
+    <addaction name="actionBlood"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuCamera"/>
    <addaction name="menuTrack"/>
    <addaction name="menuCurve"/>
    <addaction name="menuVelocity"/>
+   <addaction name="menuSkybox"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="mainToolBar">
@@ -1212,6 +1219,11 @@ QPushButton:pressed {
    </property>
    <property name="text">
     <string>Road</string>
+   </property>
+  </action>
+  <action name="actionBlood">
+   <property name="text">
+    <string>blood</string>
    </property>
   </action>
  </widget>

@@ -47,7 +47,7 @@ void TrainView::initializeGL()
 	Core::Shader_Loader shaderLoader1;
 	program1 = shaderLoader1.CreateProgram("Vertex_Shader.glsl", "Fragment_Shader.glsl");
 	//initShader("vertex.vs", "fragment.frag");
-	readSkyBox(eSkyBox::blood);
+	//readSkyBox(eSkyBox::blood);
 
 	/*Mobj = new Model("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/colony sector/colony sector.obj", 15.0,
 	Point3d(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z));*/
