@@ -47,6 +47,7 @@ AppMain::AppMain(QWidget *parent)
 	connect( ui.aRoad		,SIGNAL(triggered()),this,SLOT(ChangeTrackToRoad())		);
 
 	connect(ui.actionBlood, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToBlood())	);
+	connect(ui.actionCloudyLightRays, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToCloudyLightRays()));
 
 	connect( ui.bPlay		,SIGNAL(clicked()),this,SLOT(SwitchPlayAndPause())				);
 	connect( ui.sSpeed		,SIGNAL(valueChanged(int)),this,SLOT(ChangeSpeedOfTrain(int))	);
@@ -456,6 +457,11 @@ void AppMain::ChangeTrackToRoad()
 void AppMain::ChangeSkyboxToBlood()
 {
 	this->trainview->readSkyBox(TrainView::blood);
+}
+
+void AppMain::ChangeSkyboxToCloudyLightRays()
+{
+	this->trainview->readSkyBox(TrainView::cloudLightRay);
 }
 
 void AppMain::UpdateCameraState(int index)

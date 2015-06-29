@@ -44,7 +44,8 @@ public:
 	explicit TrainView(QWidget *parent = 0);  
 	~TrainView();  
 	enum eSkyBox{
-		blood = 0
+		blood = 0,
+		cloudLightRay
 	};
 
 public:
@@ -59,6 +60,7 @@ public:
 	void drawStuff(bool doingShadows=false);
 
 	//[Cloud_Lin]
+	void myDrawFloor();
 	void drawTrack(bool doingShadows = false);
 	void drawTrain(float, bool doingShadows = false);
 
@@ -116,7 +118,9 @@ public:
 	Model *Mobj;
 	C3DSLoader M3ds;
 	Pnt3f modelPos0, modelPos1;
-	TextureImage texture[6];
+	//TextureImage arrSkyboxTexture[6];
+	GLuint arrSkyboxTexture[6];
+	GLuint floorTexID = 0;
 	TextureImage moonTex;
 	GLuint program1;
 

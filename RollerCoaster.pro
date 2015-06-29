@@ -18,7 +18,7 @@ LIBS += -L"../../../../../../../qt/qt5.5.0/5.5/msvc2013/lib" \
     -lD:/qt/qt5.5.0/5.5/msvc2013/lib/Qt5Cored
 DEPENDPATH += .
 MOC_DIR += debug
-OBJECTS_DIR += debug
+OBJECTS_DIR += ./Roller Coaster/Obj/Debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 include(RollerCoaster.pri)

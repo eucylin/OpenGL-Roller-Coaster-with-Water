@@ -6,7 +6,9 @@
 
 #include "TrainView.h"  
 #include "Load3DModel/TGATexture.h"  
+#include "Load3DModel/ReadTexture.h"
 
+#include "Load3DModel/Model.h"
 #include "Load3DModel/point3d.h"
 
 #include "Load3DModel/3DSLoader.h"
@@ -47,7 +49,7 @@ void TrainView::initializeGL()
 	Core::Shader_Loader shaderLoader1;
 	program1 = shaderLoader1.CreateProgram("Vertex_Shader.glsl", "Fragment_Shader.glsl");
 	//initShader("vertex.vs", "fragment.frag");
-	//readSkyBox(eSkyBox::blood);
+	readSkyBox(eSkyBox::blood);
 
 	/*Mobj = new Model("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/colony sector/colony sector.obj", 15.0,
 	Point3d(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z));*/
@@ -57,11 +59,14 @@ void TrainView::initializeGL()
 	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/GothamTrain/train.3DS");
 	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/CODMapShipment/Files/CODMapShipment.3ds");
 	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/old fashion town/old town block.3DS");
-	M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/Train3/Train3S.3DS");
+
+	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/Train3/Train3S.3DS");
+	
 	//M3ds.Init("C:/Users/Chien-Hsuan/Desktop/Little_train/Small_train.3ds");
 	//CBMPLoader cmbp;
 	//cmbp.LoadBitmap("NA1.JPG");
-	LoadTGA(&moonTex, "Various0430_SO.tga");
+	//LoadTGA(&moonTex, "Various0430_SO.tga");
+	floorTexID = ReadTexture("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/NA1.bmp");
 }
 
 void TrainView::resetArcball()
@@ -151,31 +156,11 @@ void TrainView::paintGL()
 	//*********************************************************************
 	// now draw the ground plane
 	//*********************************************************************
-	setupFloor();
+	drawSkyBox();
 	glDisable(GL_LIGHTING);
-	//drawFloor(200,10);
-	float maxX = 200 / 2, maxY = 200 / 2;
-	float minX = -200 / 2, minY = -200 / 2;
-
-	int x, y, v[3], i;
-	float xp, yp, xd, yd;
-	v[2] = 0;
-	xd = (maxX - minX) / ((float)10);
-	yd = (maxY - minY) / ((float)10);
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, moonTex.texID);
-	glBegin(GL_QUADS);
-	
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0, 0); glVertex3d(-1000, 0, -1000);
-	glTexCoord2f(0, 1); glVertex3d(-1000, 0, 1000);
-	glTexCoord2f(1, 1); glVertex3d(1000, 0, 1000);
-	glTexCoord2f(1, 0); glVertex3d(1000, 0, -1000);
-
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-	
-
+	setupFloor();
+	myDrawFloor();
+	//drawFloor();
 
 	//*********************************************************************
 	// now draw the object and we need to do it twice
@@ -184,7 +169,7 @@ void TrainView::paintGL()
 	glEnable(GL_LIGHTING);
 	setupObjects();
 
-	drawStuff();
+	drawStuff(false);
 	glDisable(GL_TEXTURE_2D);
 	// this time drawing is for shadows (except for top view)
 	if (this->camera != 1) {
@@ -273,8 +258,6 @@ setProjection()
 
 void TrainView::drawStuff(bool doingShadows)
 {
-	drawSkyBox();
-
 	// Draw the control points
 	// don't draw the control points if you're driving 
 	// (otherwise you get sea-sick as you drive through them)
@@ -315,6 +298,31 @@ void TrainView::drawStuff(bool doingShadows)
 	if (!tw->trainCam->value())
 		drawTrain(this, doingShadows);
 #endif
+}
+
+void TrainView::myDrawFloor()
+{
+	float maxX = 200 / 2, maxY = 200 / 2;
+	float minX = -200 / 2, minY = -200 / 2;
+
+	int x, y, v[3], i;
+	float xp, yp, xd, yd;
+	v[2] = 0;
+	xd = (maxX - minX) / ((float)10);
+	yd = (maxY - minY) / ((float)10);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, floorTexID);
+	glBegin(GL_QUADS);
+
+	glNormal3f(0, 1, 0);
+	glTexCoord2f(0, 0); glVertex3d(-300, 0, -300);
+	glTexCoord2f(0, 1); glVertex3d(-300, 0, 300);
+	glTexCoord2f(1, 1); glVertex3d(300, 0, 300);
+	glTexCoord2f(1, 0); glVertex3d(300, 0, -300);
+
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_2D);
 }
 
 float MatCardinal[4][4] =
@@ -429,7 +437,7 @@ void TrainView::drawTrack(bool doingShadows)
 			}
 			qt1 = qt;
 
-			glUseProgram(program1);
+			//glUseProgram(program1);
 			switch (type_track)
 			{
 			case TrainView::Line:
@@ -484,7 +492,7 @@ void TrainView::drawTrack(bool doingShadows)
 			default:
 				break;
 			}
-			glUseProgram(0);
+			//glUseProgram(0);
 		}
 	}
 }
@@ -517,7 +525,7 @@ void TrainView::drawTrain(float t, bool doingShadows)
 		tt1 = samplePoints[floor(t * (samplePoints.size()-1)) + 1];
 		break; 
 	} 
-	/*glColor3ub(255, 255, 255);
+	glColor3ub(255, 255, 255);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(tt1.x - 5, tt1.y - 5, tt1.z - 5);
@@ -527,13 +535,13 @@ void TrainView::drawTrain(float t, bool doingShadows)
 	glVertex3f(tt1.x + 5, tt1.y + 5, tt1.z - 5);
 	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(tt1.x - 5, tt1.y + 5, tt1.z - 5);
-	glEnd();*/
+	glEnd();
 
 	modelPos0 = tt0;
 	modelPos1 = tt1;
 	/*Mobj->render();*/
-	if (this->camera != 2)
-		M3ds.Draw(modelPos0, modelPos1, orient_t);
+	/*if (this->camera != 2)
+		M3ds.Draw(modelPos0, modelPos1, orient_t);*/
 }
 
 void TrainView::readSkyBox(eSkyBox skyBoxName)
@@ -545,21 +553,33 @@ void TrainView::readSkyBox(eSkyBox skyBoxName)
 	switch (skyBoxName)
 	{
 	case TrainView::blood:
-		s_filename.push_back("blood_ft.tga");
-		s_filename.push_back("blood_lf.tga");
-		s_filename.push_back("blood_bk.tga");
-		s_filename.push_back("blood_rt.tga");
-		s_filename.push_back("blood_up.tga");
-		s_filename.push_back("blood_dn.tga");
+		s_filename.push_back("blood_ft");
+		s_filename.push_back("blood_lf");
+		s_filename.push_back("blood_bk");
+		s_filename.push_back("blood_rt");
+		s_filename.push_back("blood_up");
+		s_filename.push_back("blood_dn");
+		break;
+	case TrainView::cloudLightRay:
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysFront2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysLeft2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysBack2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysRight2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysUp2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysDown2048.png");
 		break;
 	default:
 		break;
 	}
 
+	//for (int i = 0; i < 6; i++){
+	//	//char tmp[] = s_filename[i];
+	//	if (!LoadTGA(&arrSkyboxTexture[i], s_filename[i].c_str()))
+	//		qDebug() << "SHIT! Load Skybox Texture Failed";
+	//}
+
 	for (int i = 0; i < 6; i++){
-		//char tmp[] = s_filename[i];
-		if (!LoadTGA(&texture[i], s_filename[i].c_str()))
-			qDebug() << "SHIT! Load Skybox Texture Failed";
+		arrSkyboxTexture[i] = ReadTexture(s_filename[i].c_str());
 	}
 }
 
@@ -601,7 +621,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	// Enable/Disable features
 	//glPushAttrib(GL_ENABLE_BIT);
 	glEnable(GL_TEXTURE_2D);
-	//glDisable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_BLEND);
 
@@ -609,7 +629,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glColor4f(1, 1, 1, 1);
 
 	// Render the front quad
-	glBindTexture(GL_TEXTURE_2D, texture[0].texID);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[0]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(1500, -1500, -1500);
 	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, -1500);
@@ -618,7 +638,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the left quad
-	glBindTexture(GL_TEXTURE_2D, texture[1].texID);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[1]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(1500, -1500, 1500);
 	glTexCoord2f(1, 0); glVertex3f(1500, -1500, -1500);
@@ -627,7 +647,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the back quad
-	glBindTexture(GL_TEXTURE_2D, texture[2].texID);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[2]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, 1500);
 	glTexCoord2f(1, 0); glVertex3f(1500, -1500, 1500);
@@ -637,7 +657,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the right quad
-	glBindTexture(GL_TEXTURE_2D, texture[3].texID);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[3]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
 	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, 1500);
@@ -646,7 +666,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the top quad
-	glBindTexture(GL_TEXTURE_2D, texture[4].texID);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[4]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, -1500);
 	glTexCoord2f(0, 0); glVertex3f(-1500, 1500, 1500);
@@ -655,7 +675,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the bottom quad
-	glBindTexture(GL_TEXTURE_2D, texture[5].texID);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[5]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
 	glTexCoord2f(0, 1); glVertex3f(-1500, -1500, 1500);
@@ -663,6 +683,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glTexCoord2f(1, 0); glVertex3f(1500, -1500, -1500);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// Restore enable bits and matrix
 	//glPopAttrib();

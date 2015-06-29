@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'AppMainh80708.ui'
+** Form generated from reading UI file 'AppMainHp9952.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef APPMAINH80708_H
-#define APPMAINH80708_H
+#ifndef APPMAINHP9952_H
+#define APPMAINHP9952_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -46,6 +46,12 @@ public:
     QAction *aTrack;
     QAction *aRoad;
     QAction *actionBlood;
+    QAction *actionCloudyLightRays;
+    QAction *actionDarkStormy;
+    QAction *actionFullMoon;
+    QAction *actionSunSet;
+    QAction *actionThickCloudsWater;
+    QAction *actionTropicalSunnyDay;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *mainLayout;
@@ -145,6 +151,18 @@ public:
         aRoad->setCheckable(true);
         actionBlood = new QAction(AppMainClass);
         actionBlood->setObjectName(QStringLiteral("actionBlood"));
+        actionCloudyLightRays = new QAction(AppMainClass);
+        actionCloudyLightRays->setObjectName(QStringLiteral("actionCloudyLightRays"));
+        actionDarkStormy = new QAction(AppMainClass);
+        actionDarkStormy->setObjectName(QStringLiteral("actionDarkStormy"));
+        actionFullMoon = new QAction(AppMainClass);
+        actionFullMoon->setObjectName(QStringLiteral("actionFullMoon"));
+        actionSunSet = new QAction(AppMainClass);
+        actionSunSet->setObjectName(QStringLiteral("actionSunSet"));
+        actionThickCloudsWater = new QAction(AppMainClass);
+        actionThickCloudsWater->setObjectName(QStringLiteral("actionThickCloudsWater"));
+        actionTropicalSunnyDay = new QAction(AppMainClass);
+        actionTropicalSunnyDay->setObjectName(QStringLiteral("actionTropicalSunnyDay"));
         centralWidget = new QWidget(AppMainClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -592,6 +610,12 @@ public:
         menuTrack->addAction(aTrack);
         menuTrack->addAction(aRoad);
         menuSkybox->addAction(actionBlood);
+        menuSkybox->addAction(actionCloudyLightRays);
+        menuSkybox->addAction(actionDarkStormy);
+        menuSkybox->addAction(actionFullMoon);
+        menuSkybox->addAction(actionSunSet);
+        menuSkybox->addAction(actionThickCloudsWater);
+        menuSkybox->addAction(actionTropicalSunnyDay);
         mainToolBar->addAction(aLoadPath);
         mainToolBar->addAction(aSavePath);
 
@@ -616,6 +640,12 @@ public:
         aTrack->setText(QApplication::translate("AppMainClass", "Track", 0));
         aRoad->setText(QApplication::translate("AppMainClass", "Road", 0));
         actionBlood->setText(QApplication::translate("AppMainClass", "blood", 0));
+        actionCloudyLightRays->setText(QApplication::translate("AppMainClass", "CloudyLightRays", 0));
+        actionDarkStormy->setText(QApplication::translate("AppMainClass", "DarkStormy", 0));
+        actionFullMoon->setText(QApplication::translate("AppMainClass", "FullMoon", 0));
+        actionSunSet->setText(QApplication::translate("AppMainClass", "SunSet", 0));
+        actionThickCloudsWater->setText(QApplication::translate("AppMainClass", "ThickCloudsWater", 0));
+        actionTropicalSunnyDay->setText(QApplication::translate("AppMainClass", "TropicalSunnyDay", 0));
         groupCamera->setTitle(QApplication::translate("AppMainClass", "Camera", 0));
         comboCamera->clear();
         comboCamera->insertItems(0, QStringList()
@@ -664,4 +694,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // APPMAINH80708_H
+#endif // APPMAINHP9952_H

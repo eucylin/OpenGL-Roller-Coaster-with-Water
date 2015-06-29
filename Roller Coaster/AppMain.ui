@@ -1095,6 +1095,12 @@ QPushButton:pressed {
      <string>Skybox</string>
     </property>
     <addaction name="actionBlood"/>
+    <addaction name="actionCloudyLightRays"/>
+    <addaction name="actionDarkStormy"/>
+    <addaction name="actionFullMoon"/>
+    <addaction name="actionSunSet"/>
+    <addaction name="actionThickCloudsWater"/>
+    <addaction name="actionTropicalSunnyDay"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuCamera"/>
@@ -1224,6 +1230,36 @@ QPushButton:pressed {
   <action name="actionBlood">
    <property name="text">
     <string>blood</string>
+   </property>
+  </action>
+  <action name="actionCloudyLightRays">
+   <property name="text">
+    <string>CloudyLightRays</string>
+   </property>
+  </action>
+  <action name="actionDarkStormy">
+   <property name="text">
+    <string>DarkStormy</string>
+   </property>
+  </action>
+  <action name="actionFullMoon">
+   <property name="text">
+    <string>FullMoon</string>
+   </property>
+  </action>
+  <action name="actionSunSet">
+   <property name="text">
+    <string>SunSet</string>
+   </property>
+  </action>
+  <action name="actionThickCloudsWater">
+   <property name="text">
+    <string>ThickCloudsWater</string>
+   </property>
+  </action>
+  <action name="actionTropicalSunnyDay">
+   <property name="text">
+    <string>TropicalSunnyDay</string>
    </property>
   </action>
  </widget>

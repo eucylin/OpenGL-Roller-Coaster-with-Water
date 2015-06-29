@@ -165,6 +165,9 @@
     <ClInclude Include="Include\Shader\Shader_Loader.h">
       <Filter>Header Files\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Load3DModel\ReadTexture.h">
+      <Filter>Header Files\Load3DModel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Include\Shader\fragment.frag">

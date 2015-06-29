@@ -227,6 +227,7 @@
     <ClInclude Include="Include\Load3DModel\CbmpLoader.h" />
     <ClInclude Include="Include\Load3DModel\Model.h" />
     <ClInclude Include="Include\Load3DModel\point3d.h" />
+    <ClInclude Include="Include\Load3DModel\ReadTexture.h" />
     <ClInclude Include="Include\Load3DModel\TGATexture.h" />
     <ClInclude Include="Include\Load3DModel\vector.h" />
     <ClInclude Include="Include\Shader\Shader_Loader.h" />

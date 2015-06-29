@@ -20,8 +20,8 @@ HEADERS += ./Include/ControlPoint.H \
     ./Include/Load3DModel/point3d.h \
     ./Include/Load3DModel/TGATexture.h \
     ./Include/Load3DModel/vector.h \
-    ./Include/Shader/SimpleShaderHandler.h \
-    ./Include/Shader/Shader_Loader.h
+    ./Include/Shader/Shader_Loader.h \
+    ./Include/Shader/SimpleShaderHandler.h
 SOURCES += ./Src/AppMain.cpp \
     ./Src/ControlPoint.cpp \
     ./Src/main.cpp \

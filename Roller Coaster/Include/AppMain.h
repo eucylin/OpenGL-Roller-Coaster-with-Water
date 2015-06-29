@@ -78,6 +78,7 @@ private:
 
 		/*		Cloud_Lin		*/
 		void ChangeSkyboxToBlood();
+		void ChangeSkyboxToCloudyLightRays();
 		/*		Cloud_Lin		*/
 
 		void SwitchPlayAndPause();
