@@ -42,7 +42,6 @@ TrainView::~TrainView()
 void TrainView::initializeGL()
 {
 	initializeOpenGLFunctions();
-	glEnable(GL_DEPTH_TEST);
 	GLenum err = glewInit();
 	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
 
@@ -315,10 +314,10 @@ void TrainView::myDrawFloor()
 	glBegin(GL_QUADS);
 
 	glNormal3f(0, 1, 0);
-	glTexCoord2f(0, 0); glVertex3d(-300, 0, -300);
-	glTexCoord2f(0, 1); glVertex3d(-300, 0, 300);
-	glTexCoord2f(1, 1); glVertex3d(300, 0, 300);
-	glTexCoord2f(1, 0); glVertex3d(300, 0, -300);
+	glTexCoord2f(0, 0); glVertex3d(-101, 0, -101);
+	glTexCoord2f(0, 1); glVertex3d(-101, 0, 101);
+	glTexCoord2f(1, 1); glVertex3d(101, 0, 101);
+	glTexCoord2f(1, 0); glVertex3d(101, 0, -101);
 
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -364,11 +363,11 @@ void TrainView::drawTrack(bool doingShadows)
 
 		switch (type_spline){
 		case spline_Linear:
-			DIVIDE_LINE = floor(sqrt(pow(cp_pos_p2.x - cp_pos_p1.x, 2.0) + pow(cp_pos_p2.y - cp_pos_p1.y, 2.0) + pow(cp_pos_p2.z - cp_pos_p1.z, 2.0)) * 2);
+			DIVIDE_LINE = floor(sqrt(pow(cp_pos_p2.x - cp_pos_p1.x, 2.0) + pow(cp_pos_p2.y - cp_pos_p1.y, 2.0) + pow(cp_pos_p2.z - cp_pos_p1.z, 2.0)) * 1);
 			break;
 		case spline_CardinalCubic:
 		case spline_CubicB_Spline:
-			DIVIDE_LINE = floor(sqrt(pow(cp_pos_p2.x - cp_pos_p3.x, 2.0) + pow(cp_pos_p2.y - cp_pos_p3.y, 2.0) + pow(cp_pos_p2.z - cp_pos_p3.z, 2.0)) * 2);
+			DIVIDE_LINE = floor(sqrt(pow(cp_pos_p2.x - cp_pos_p3.x, 2.0) + pow(cp_pos_p2.y - cp_pos_p3.y, 2.0) + pow(cp_pos_p2.z - cp_pos_p3.z, 2.0)) * 1);
 			break;
 		}
 
@@ -525,15 +524,15 @@ void TrainView::drawTrain(float t, bool doingShadows)
 		tt1 = samplePoints[floor(t * (samplePoints.size()-1)) + 1];
 		break; 
 	} 
-	glColor3ub(255, 255, 255);
+	glColor3ub(0, 0, 0);
 	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 0.0f);
+	//glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(tt1.x - 5, tt1.y - 5, tt1.z - 5);
-	glTexCoord2f(1.0f, 0.0f);
+	//glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(tt1.x + 5, tt1.y - 5, tt1.z - 5);
-	glTexCoord2f(1.0f, 1.0f);
+	//glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(tt1.x + 5, tt1.y + 5, tt1.z - 5);
-	glTexCoord2f(0.0f, 1.0f);
+	//glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(tt1.x - 5, tt1.y + 5, tt1.z - 5);
 	glEnd();
 
@@ -549,7 +548,7 @@ void TrainView::readSkyBox(eSkyBox skyBoxName)
 	GLuint _skybox[6];
 	vector<string> s_filename;
 	s_filename.clear();
-
+	//"D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/abc/abcFront2048.png"
 	switch (skyBoxName)
 	{
 	case TrainView::blood:
@@ -567,6 +566,46 @@ void TrainView::readSkyBox(eSkyBox skyBoxName)
 		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysRight2048.png");
 		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysUp2048.png");
 		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/CloudyLightRays/CloudyLightRaysDown2048.png");
+		break;
+	case TrainView::DarkStormy:
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/DarkStormy/DarkStormyFront2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/DarkStormy/DarkStormyLeft2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/DarkStormy/DarkStormyBack2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/DarkStormy/DarkStormyRight2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/DarkStormy/DarkStormyUp2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/DarkStormy/DarkStormyDown2048.png");
+		break;
+	case TrainView::FullMoon:
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/FullMoon/FullMoonFront2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/FullMoon/FullMoonLeft2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/FullMoon/FullMoonBack2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/FullMoon/FullMoonRight2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/FullMoon/FullMoonUp2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/FullMoon/FullMoonDown2048.png");
+		break;
+	case TrainView::SunSet:
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/SunSet/SunSetFront2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/SunSet/SunSetLeft2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/SunSet/SunSetBack2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/SunSet/SunSetRight2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/SunSet/SunSetUp2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/SunSet/SunSetDown2048.png");
+		break;
+	case TrainView::ThickCloudsWater:
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/ThickCloudsWater/ThickCloudsWaterFront2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/ThickCloudsWater/ThickCloudsWaterLeft2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/ThickCloudsWater/ThickCloudsWaterBack2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/ThickCloudsWater/ThickCloudsWaterRight2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/ThickCloudsWater/ThickCloudsWaterUp2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/ThickCloudsWater/ThickCloudsWaterDown2048.png");
+		break;
+	case TrainView::TropicalSunnyDay:
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/TropicalSunnyDay/TropicalSunnyDayFront2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/TropicalSunnyDay/TropicalSunnyDayLeft2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/TropicalSunnyDay/TropicalSunnyDayBack2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/TropicalSunnyDay/TropicalSunnyDayRight2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/TropicalSunnyDay/TropicalSunnyDayUp2048.png");
+		s_filename.push_back("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/SkyboxSet1/TropicalSunnyDay/TropicalSunnyDayDown2048.png");
 		break;
 	default:
 		break;
@@ -620,6 +659,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 
 	// Enable/Disable features
 	//glPushAttrib(GL_ENABLE_BIT);
+
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
@@ -684,7 +724,6 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
-
 	// Restore enable bits and matrix
 	//glPopAttrib();
 	/*glPopMatrix();*/

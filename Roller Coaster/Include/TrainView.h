@@ -45,7 +45,12 @@ public:
 	~TrainView();  
 	enum eSkyBox{
 		blood = 0,
-		cloudLightRay
+		cloudLightRay,
+		DarkStormy,
+		FullMoon,
+		SunSet,
+		ThickCloudsWater,
+		TropicalSunnyDay
 	};
 
 public:

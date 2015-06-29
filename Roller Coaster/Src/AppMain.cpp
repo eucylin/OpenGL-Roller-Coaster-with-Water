@@ -48,6 +48,11 @@ AppMain::AppMain(QWidget *parent)
 
 	connect(ui.actionBlood, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToBlood())	);
 	connect(ui.actionCloudyLightRays, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToCloudyLightRays()));
+	connect(ui.actionDarkStormy, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToDarkStormy()));
+	connect(ui.actionFullMoon, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToFullMoon()));
+	connect(ui.actionSunSet, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToSunSet()));
+	connect(ui.actionThickCloudsWater, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToThickCloudsWater()));
+	connect(ui.actionTropicalSunnyDay, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToTropicalSunnyDay()));
 
 	connect( ui.bPlay		,SIGNAL(clicked()),this,SLOT(SwitchPlayAndPause())				);
 	connect( ui.sSpeed		,SIGNAL(valueChanged(int)),this,SLOT(ChangeSpeedOfTrain(int))	);
@@ -464,6 +469,31 @@ void AppMain::ChangeSkyboxToCloudyLightRays()
 	this->trainview->readSkyBox(TrainView::cloudLightRay);
 }
 
+void AppMain::ChangeSkyboxToDarkStormy()
+{
+	this->trainview->readSkyBox(TrainView::DarkStormy);
+}
+
+void AppMain::ChangeSkyboxToFullMoon()
+{
+	this->trainview->readSkyBox(TrainView::FullMoon);
+}
+
+void AppMain::ChangeSkyboxToSunSet()
+{
+	this->trainview->readSkyBox(TrainView::SunSet);
+}
+
+void AppMain::ChangeSkyboxToThickCloudsWater()
+{
+	this->trainview->readSkyBox(TrainView::ThickCloudsWater);
+}
+
+void AppMain::ChangeSkyboxToTropicalSunnyDay()
+{
+	this->trainview->readSkyBox(TrainView::TropicalSunnyDay);
+}
+
 void AppMain::UpdateCameraState(int index)
 {
 	ui.aWorld->setChecked( (index==0)?true:false );
@@ -511,9 +541,8 @@ advanceTrain(float dir)
 	// TODO: make this work for your train
 	//#####################################################################
 
-	trainview->t_time += (dir / m_Track.points.size() / (trainview->DIVIDE_LINE / 40));
+	//trainview->t_time += (dir / m_Track.points.size() / (trainview->DIVIDE_LINE / 10));
+	trainview->t_time += (dir / m_Track.points.size() / (222 / 10));
 	if (trainview->t_time > 1.0f)
 		trainview->t_time -= 1.0f;
-	
-
 }

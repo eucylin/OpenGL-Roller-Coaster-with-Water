@@ -79,6 +79,11 @@ private:
 		/*		Cloud_Lin		*/
 		void ChangeSkyboxToBlood();
 		void ChangeSkyboxToCloudyLightRays();
+		void ChangeSkyboxToDarkStormy();
+		void ChangeSkyboxToFullMoon();
+		void ChangeSkyboxToSunSet();
+		void ChangeSkyboxToThickCloudsWater();
+		void ChangeSkyboxToTropicalSunnyDay();
 		/*		Cloud_Lin		*/
 
 		void SwitchPlayAndPause();
