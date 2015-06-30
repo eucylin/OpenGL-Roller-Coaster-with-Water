@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'AppMainHp9952.ui'
+** Form generated from reading UI file 'AppMainp26324.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef APPMAINHP9952_H
-#define APPMAINHP9952_H
+#ifndef APPMAINP26324_H
+#define APPMAINP26324_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -52,6 +52,12 @@ public:
     QAction *actionSunSet;
     QAction *actionThickCloudsWater;
     QAction *actionTropicalSunnyDay;
+    QAction *actionNONE;
+    QAction *actionWood;
+    QAction *actionDimple;
+    QAction *actionKill;
+    QAction *actionSWater;
+    QAction *actionPhong;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *mainLayout;
@@ -86,6 +92,7 @@ public:
     QMenu *menuTrack;
     QMenu *menuVelocity;
     QMenu *menuSkybox;
+    QMenu *menuShader;
     QStatusBar *statusBar;
     QToolBar *mainToolBar;
 
@@ -163,6 +170,18 @@ public:
         actionThickCloudsWater->setObjectName(QStringLiteral("actionThickCloudsWater"));
         actionTropicalSunnyDay = new QAction(AppMainClass);
         actionTropicalSunnyDay->setObjectName(QStringLiteral("actionTropicalSunnyDay"));
+        actionNONE = new QAction(AppMainClass);
+        actionNONE->setObjectName(QStringLiteral("actionNONE"));
+        actionWood = new QAction(AppMainClass);
+        actionWood->setObjectName(QStringLiteral("actionWood"));
+        actionDimple = new QAction(AppMainClass);
+        actionDimple->setObjectName(QStringLiteral("actionDimple"));
+        actionKill = new QAction(AppMainClass);
+        actionKill->setObjectName(QStringLiteral("actionKill"));
+        actionSWater = new QAction(AppMainClass);
+        actionSWater->setObjectName(QStringLiteral("actionSWater"));
+        actionPhong = new QAction(AppMainClass);
+        actionPhong->setObjectName(QStringLiteral("actionPhong"));
         centralWidget = new QWidget(AppMainClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -582,6 +601,8 @@ public:
         menuVelocity->setObjectName(QStringLiteral("menuVelocity"));
         menuSkybox = new QMenu(menuBar);
         menuSkybox->setObjectName(QStringLiteral("menuSkybox"));
+        menuShader = new QMenu(menuBar);
+        menuShader->setObjectName(QStringLiteral("menuShader"));
         AppMainClass->setMenuBar(menuBar);
         statusBar = new QStatusBar(AppMainClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -596,6 +617,7 @@ public:
         menuBar->addAction(menuCurve->menuAction());
         menuBar->addAction(menuVelocity->menuAction());
         menuBar->addAction(menuSkybox->menuAction());
+        menuBar->addAction(menuShader->menuAction());
         menuFile->addAction(aLoadPath);
         menuFile->addAction(aSavePath);
         menuFile->addSeparator();
@@ -616,6 +638,12 @@ public:
         menuSkybox->addAction(actionSunSet);
         menuSkybox->addAction(actionThickCloudsWater);
         menuSkybox->addAction(actionTropicalSunnyDay);
+        menuShader->addAction(actionNONE);
+        menuShader->addAction(actionWood);
+        menuShader->addAction(actionDimple);
+        menuShader->addAction(actionKill);
+        menuShader->addAction(actionSWater);
+        menuShader->addAction(actionPhong);
         mainToolBar->addAction(aLoadPath);
         mainToolBar->addAction(aSavePath);
 
@@ -646,6 +674,12 @@ public:
         actionSunSet->setText(QApplication::translate("AppMainClass", "SunSet", 0));
         actionThickCloudsWater->setText(QApplication::translate("AppMainClass", "ThickCloudsWater", 0));
         actionTropicalSunnyDay->setText(QApplication::translate("AppMainClass", "TropicalSunnyDay", 0));
+        actionNONE->setText(QApplication::translate("AppMainClass", "NONE", 0));
+        actionWood->setText(QApplication::translate("AppMainClass", "wood", 0));
+        actionDimple->setText(QApplication::translate("AppMainClass", "dimple", 0));
+        actionKill->setText(QApplication::translate("AppMainClass", "kill", 0));
+        actionSWater->setText(QApplication::translate("AppMainClass", "sWater", 0));
+        actionPhong->setText(QApplication::translate("AppMainClass", "Phong", 0));
         groupCamera->setTitle(QApplication::translate("AppMainClass", "Camera", 0));
         comboCamera->clear();
         comboCamera->insertItems(0, QStringList()
@@ -684,6 +718,7 @@ public:
         menuTrack->setTitle(QApplication::translate("AppMainClass", "Track", 0));
         menuVelocity->setTitle(QApplication::translate("AppMainClass", "Velocity", 0));
         menuSkybox->setTitle(QApplication::translate("AppMainClass", "Skybox", 0));
+        menuShader->setTitle(QApplication::translate("AppMainClass", "Shader", 0));
     } // retranslateUi
 
 };
@@ -694,4 +729,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // APPMAINHP9952_H
+#endif // APPMAINP26324_H

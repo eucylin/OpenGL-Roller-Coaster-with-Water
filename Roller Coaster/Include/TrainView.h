@@ -141,6 +141,7 @@ public:
 	GLuint program1, woodProgram, dimpleProgram, killProgram, sWaterProgram, PhongProgram;
 	vector<Pnt3f> cubePntSets;
 	float cubeTime = 0,cubeFreq = 0.0001;
+	eShader nowCubeShader = eShader::NONE;
 
 	GLfloat waveTime = 0.5,
 		waveWidth = 0.6,

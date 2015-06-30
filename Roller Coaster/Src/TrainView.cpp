@@ -302,7 +302,7 @@ void TrainView::drawStuff(bool doingShadows)
 	
 	//M3ds.Draw(modelPos);
 	drawTrain(t_time, doingShadows);
-	drawCubeSets(eShader::Phong);
+	drawCubeSets(nowCubeShader);
 	drawWater();
 #ifdef EXAMPLE_SOLUTION
 	// don't draw the train if you're looking out the front window

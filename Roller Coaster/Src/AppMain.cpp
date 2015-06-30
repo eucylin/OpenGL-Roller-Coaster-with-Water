@@ -54,6 +54,13 @@ AppMain::AppMain(QWidget *parent)
 	connect(ui.actionThickCloudsWater, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToThickCloudsWater()));
 	connect(ui.actionTropicalSunnyDay, SIGNAL(triggered()), this, SLOT(ChangeSkyboxToTropicalSunnyDay()));
 
+	connect(ui.actionNONE, SIGNAL(triggered()), this, SLOT(ChangeShaderToNONE()));
+	connect(ui.actionWood, SIGNAL(triggered()), this, SLOT(ChangeShaderToWood()));
+	connect(ui.actionDimple, SIGNAL(triggered()), this, SLOT(ChangeShaderToDimple()));
+	connect(ui.actionKill, SIGNAL(triggered()), this, SLOT(ChangeShaderToKill()));
+	connect(ui.actionSWater, SIGNAL(triggered()), this, SLOT(ChangeShaderToSWater()));
+	connect(ui.actionPhong, SIGNAL(triggered()), this, SLOT(ChangeShaderToPhong()));
+
 	connect( ui.bPlay		,SIGNAL(clicked()),this,SLOT(SwitchPlayAndPause())				);
 	connect( ui.sSpeed		,SIGNAL(valueChanged(int)),this,SLOT(ChangeSpeedOfTrain(int))	);
 	connect( ui.bAdd		,SIGNAL(clicked()),this,SLOT(AddControlPoint())					);
@@ -492,6 +499,36 @@ void AppMain::ChangeSkyboxToThickCloudsWater()
 void AppMain::ChangeSkyboxToTropicalSunnyDay()
 {
 	this->trainview->readSkyBox(TrainView::TropicalSunnyDay);
+}
+
+void AppMain::ChangeShaderToNONE()
+{
+	this->trainview->nowCubeShader = TrainView::NONE;
+}
+
+void AppMain::ChangeShaderToWood()
+{
+	this->trainview->nowCubeShader = TrainView::wood;
+}
+
+void AppMain::ChangeShaderToDimple()
+{
+	this->trainview->nowCubeShader = TrainView::dimple;
+}
+
+void AppMain::ChangeShaderToKill()
+{
+	this->trainview->nowCubeShader = TrainView::kill;
+}
+
+void AppMain::ChangeShaderToSWater()
+{
+	this->trainview->nowCubeShader = TrainView::sWater;
+}
+
+void AppMain::ChangeShaderToPhong()
+{
+	this->trainview->nowCubeShader = TrainView::Phong;
 }
 
 void AppMain::UpdateCameraState(int index)

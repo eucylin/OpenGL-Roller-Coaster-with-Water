@@ -1102,12 +1102,24 @@ QPushButton:pressed {
     <addaction name="actionThickCloudsWater"/>
     <addaction name="actionTropicalSunnyDay"/>
    </widget>
+   <widget class="QMenu" name="menuShader">
+    <property name="title">
+     <string>Shader</string>
+    </property>
+    <addaction name="actionNONE"/>
+    <addaction name="actionWood"/>
+    <addaction name="actionDimple"/>
+    <addaction name="actionKill"/>
+    <addaction name="actionSWater"/>
+    <addaction name="actionPhong"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuCamera"/>
    <addaction name="menuTrack"/>
    <addaction name="menuCurve"/>
    <addaction name="menuVelocity"/>
    <addaction name="menuSkybox"/>
+   <addaction name="menuShader"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="mainToolBar">
@@ -1260,6 +1272,36 @@ QPushButton:pressed {
   <action name="actionTropicalSunnyDay">
    <property name="text">
     <string>TropicalSunnyDay</string>
+   </property>
+  </action>
+  <action name="actionNONE">
+   <property name="text">
+    <string>NONE</string>
+   </property>
+  </action>
+  <action name="actionWood">
+   <property name="text">
+    <string>wood</string>
+   </property>
+  </action>
+  <action name="actionDimple">
+   <property name="text">
+    <string>dimple</string>
+   </property>
+  </action>
+  <action name="actionKill">
+   <property name="text">
+    <string>kill</string>
+   </property>
+  </action>
+  <action name="actionSWater">
+   <property name="text">
+    <string>sWater</string>
+   </property>
+  </action>
+  <action name="actionPhong">
+   <property name="text">
+    <string>Phong</string>
    </property>
   </action>
  </widget>

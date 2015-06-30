@@ -84,6 +84,13 @@ private:
 		void ChangeSkyboxToSunSet();
 		void ChangeSkyboxToThickCloudsWater();
 		void ChangeSkyboxToTropicalSunnyDay();
+
+		void ChangeShaderToNONE();
+		void ChangeShaderToWood();
+		void ChangeShaderToDimple();
+		void ChangeShaderToKill();
+		void ChangeShaderToSWater();
+		void ChangeShaderToPhong();
 		/*		Cloud_Lin		*/
 
 		void SwitchPlayAndPause();
