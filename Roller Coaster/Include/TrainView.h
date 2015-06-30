@@ -57,7 +57,8 @@ public:
 		wood = 0,
 		dimple,
 		kill,
-		sWater
+		sWater,
+		Phong
 	};
 
 public:
@@ -137,7 +138,7 @@ public:
 	GLuint arrSkyboxTexture[6];
 	GLuint floorTexID = 0;
 	TextureImage moonTex;
-	GLuint program1, woodProgram, dimpleProgram, killProgram, sWaterProgram;
+	GLuint program1, woodProgram, dimpleProgram, killProgram, sWaterProgram, PhongProgram;
 	vector<Pnt3f> cubePntSets;
 	float cubeTime = 0,cubeFreq = 0.0001;
 

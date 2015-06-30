@@ -51,6 +51,7 @@ void TrainView::initializeGL()
 	dimpleProgram = shaderLoader.CreateProgram("Shaders/dimple.vert", "Shaders/dimple.frag");
 	killProgram = shaderLoader.CreateProgram("Shaders/kill.vert", "Shaders/kill.frag");
 	sWaterProgram = shaderLoader.CreateProgram("Shaders/swater.vert", "Shaders/swater.frag");
+	PhongProgram = shaderLoader.CreateProgram("Shaders/Phong.vert", "Shaders/Phong.frag");
 	//initShader("vertex.vs", "fragment.frag");
 	readSkyBox(eSkyBox::blood);
 
@@ -301,7 +302,7 @@ void TrainView::drawStuff(bool doingShadows)
 	
 	//M3ds.Draw(modelPos);
 	drawTrain(t_time, doingShadows);
-	drawCubeSets();
+	drawCubeSets(eShader::Phong);
 	drawWater();
 #ifdef EXAMPLE_SOLUTION
 	// don't draw the train if you're looking out the front window
@@ -361,8 +362,6 @@ void TrainView::drawTrack(bool doingShadows)
 		Pnt3f cp_pos_p2 = m_pTrack->points[(i + 1) % m_pTrack->points.size()].pos;
 		Pnt3f cp_pos_p3 = m_pTrack->points[(i + 2) % m_pTrack->points.size()].pos;
 		Pnt3f cp_pos_p4 = m_pTrack->points[(i + 3) % m_pTrack->points.size()].pos;
-
-		
 
 		Pnt3f cp_pos[4] = { cp_pos_p1,	cp_pos_p2,	cp_pos_p3,	cp_pos_p4	};
 
@@ -572,6 +571,7 @@ void TrainView::drawTrain(float t, bool doingShadows)
 
 void TrainView::drawCubeSets(eShader shadeName)
 {
+	glEnable(GL_LIGHTING);
 	ApplyShader(shadeName);
 	drawCube(0, -55, 0, 112);
 	glPushMatrix();
@@ -809,6 +809,9 @@ void TrainView::ApplyShader(eShader shaderName)
 {
 	switch (shaderName)
 	{
+	case TrainView::NONE:
+		glUseProgram(0);
+		break;
 	case TrainView::wood:
 		glUseProgram(woodProgram);
 		glUniform1f(glGetUniformLocation(woodProgram, "GrainSizeRecip"), 1);
@@ -834,6 +837,10 @@ void TrainView::ApplyShader(eShader shaderName)
 		glActiveTexture(GL_TEXTURE0);
 		glUniform1i(glGetUniformLocation(sWaterProgram, "color_texture"), 0);
 		glBindTexture(GL_TEXTURE_2D, sWaterTex[0]);
+		break;
+	case TrainView::Phong:
+		glUseProgram(PhongProgram);
+		//glUniform1i(glGetUniformLocation(PhongProgram, "numLights"), 7); //MAX 8 Lights
 		break;
 	default:
 		break;
