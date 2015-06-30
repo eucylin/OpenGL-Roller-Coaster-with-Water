@@ -1,0 +1,62 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  2.1.10.1214
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl white
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 0.0627451 0.321569
+illum 2
+Ns 445.722
+
+newmtl red_metallic
+Ka 0.380392 0.0823529 0
+Kd 0.823529 0 0
+Ks 0.898039 0.898039 0.898039
+illum 2
+Ns 512
+
+newmtl black
+Ka 0 0 0
+Kd 0.231373 0.231373 0.231373
+Ks 0 0 0
+illum 2
+Ns 337.794
+
+newmtl chrome
+Ka 0.380392 0.380392 0.380392
+Kd 0.847059 0.847059 0.847059
+Ks 0.898039 0.898039 0.898039
+illum 2
+Ns 512
+
+newmtl glass
+Ka 0.298039 0.298039 0.298039
+Kd 0.682353 0.717647 0.717647
+Ks 1 1 1
+illum 2
+Ns 445.722
+
+newmtl red
+Ka 1 0.0627451 0.0901961
+Kd 1 0.0627451 0.0901961
+Ks 1 0.0627451 0.321569
+illum 2
+Ns 445.722
+
+newmtl black_matte
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 11.3137
+
+newmtl orange
+Ka 0.803922 0.490196 0.152941
+Kd 1 0.572549 0.192157
+Ks 1 0.0627451 0.321569
+illum 2
+Ns 445.722

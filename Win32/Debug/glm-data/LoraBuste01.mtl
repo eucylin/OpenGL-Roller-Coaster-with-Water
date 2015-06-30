@@ -1,0 +1,66 @@
+newmtl skin
+Ns 15.4175
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+map_Kd textures/Texture_Loralou4.jpg
+newmtl lips
+Ns 33.6796
+Ka 0 0 0
+Kd 0.752926 0.752926 0.752926
+Ks 0.172534 0.145083 0.113695
+map_Kd textures/Texture_Loralou4.jpg
+newmtl eyeBrow
+Ns 1
+Ka 0 0 0
+Kd 0.752926 0.752926 0.752926
+Ks 0.160754 0.133303 0.105852
+map_Kd textures/Texture_Loralou4.jpg
+newmtl innerMouth
+Ns 43.2913
+Ka 0 0 0
+Kd 0.407828 0.380377 0.372534
+Ks 0.027451 0.027451 0.027451
+map_Kd textures/Texture_Loralou4.jpg
+newmtl tongue
+Ns 66.3592
+Ka 0 0 0
+Kd 0.752926 0.752926 0.752926
+Ks 0.225376 0.226551 0.229984
+map_Kd textures/Texture_Loralou4.jpg
+newmtl teeth
+Ns 58.6699
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.882353 0.878416 0.886275
+map_Kd textures/Texture_Loralou4.jpg
+newmtl lashes
+Ns 34.6408
+Ka 0 0 0
+Kd 0.752926 0.752926 0.752926
+Ks 0.169894 0.161395 0.166217
+map_Kd textures/Texture_Loralou4.jpg
+newmtl pupil
+Ns 53.8641
+Ka 0 0 0
+Kd 0 0 0
+Ks 0.0366064 0.651133 0.398535
+map_Kd textures/Texture_Loralou4.jpg
+newmtl iris
+Ns 52.9029
+Ka 0 0 0
+Kd 0.752926 0.752926 0.752926
+Ks 0.972549 0.835279 0.0627451
+map_Kd textures/Texture_Loralou4.jpg
+newmtl eyeball
+Ns 36.5631
+Ka 0 0 0
+Kd 1 1 0.984314
+Ks 0.135027 0.0355383 0.18381
+map_Kd textures/Texture_Loralou4.jpg
+newmtl fingerNails
+Ns 48.0971
+Ka 0 0 0
+Kd 0.792157 0.521569 0.490181
+Ks 0.364706 0.364706 0.364706
+map_Kd textures/Texture_Loralou4.jpg

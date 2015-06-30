@@ -1,0 +1,22 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  2.1.10.1214
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl ____Default
+Ka 0.588235 0.588235 0.588235
+Kd 0.588235 0.588235 0.588235
+Ks 0.898039 0.898039 0.898039
+illum 2
+Ns 4
+map_Kd textures/fishermen.jpg
+
+newmtl ____Default0
+Ka 0.588235 0.588235 0.588235
+Kd 0.588235 0.588235 0.588235
+Ks 0.898039 0.898039 0.898039
+illum 2
+Ns 4
+map_Kd textures/checker.jpg

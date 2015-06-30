@@ -1,0 +1,46 @@
+# Blender MTL File: 'cart.blend'
+# Material Count: 4
+
+newmtl Mro_Yoshi20__Mt_Yoshi2
+Ns -1.960784
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd mro_yoshi_alb.png
+map_Disp mro_yoshi_nom.png
+
+newmtl Mro_Yoshi22__Mt_Yoshi
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd mro_yoshi_alb.png
+map_Disp mro_yoshi_nom.png
+
+newmtl Mro_Yoshi26__Mt_Metal
+Ns -1.960784
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd mro_yoshi_alb.png
+map_Disp mro_yoshi_nom.png
+
+newmtl YoshiSeatHandle__Mt_Seat
+Ns -1.960784
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd mro_yoshiseat_alb.png
+map_Disp mro_yoshiseat_nom.png

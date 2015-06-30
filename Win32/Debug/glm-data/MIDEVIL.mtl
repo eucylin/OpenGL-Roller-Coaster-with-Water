@@ -1,0 +1,192 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  2.1.10.1214
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl SLATE_L_PATTERN
+Ka 1 1 1
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 13.9288
+map_Kd textures/IPAVERS.jpg
+map_bump textures/IPAVERS.jpg
+bump IPAVERS.jpg
+
+newmtl GRANIT_WALL
+Ka 0.407843 0.407843 0.407843
+Kd 0.407843 0.407843 0.407843
+Ks 0.584314 0.584314 0.584314
+illum 2
+Ns 2
+map_Kd textures/GRANITFC.jpg
+map_bump textures/GRANITFC.jpg
+bump GRANITFC.jpg
+
+newmtl GRANIT_WINDO_SIL
+Ka 0.341176 0.341176 0.341176
+Kd 0.341176 0.341176 0.341176
+Ks 0.701961 0.701961 0.701961
+illum 2
+Ns 2
+map_Kd textures/GRANITFC.jpg
+map_bump textures/GRANITFC.jpg
+bump GRANITFC.jpg
+
+newmtl CEMENT
+Ka 0.133333 0.121569 0.109804
+Kd 0.196078 0.152941 0.109804
+Ks 0.254902 0.211765 0.145098
+illum 2
+Ns 4.59479
+map_Kd textures/CEMENT.jpg
+map_bump textures/CEMENT.jpg
+bump CEMENT.jpg
+
+newmtl BLACK_MATTE
+Ka 0.0666667 0.0666667 0.0666667
+Kd 0.0666667 0.0666667 0.0666667
+Ks 0.611765 0.611765 0.611765
+illum 2
+Ns 3.73213
+
+newmtl BLACK_VINAL
+Ka 0.133333 0.133333 0.133333
+Kd 0.133333 0.133333 0.133333
+Ks 1 1 1
+illum 2
+Ns 21.1121
+
+newmtl WALNUT_TX
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 9.84916
+map_Kd textures/WALNUT1.jpg
+
+newmtl KIT_CAB
+Ka 0 0 0
+Kd 0 0 0
+Ks 0.74902 0.580392 0.278431
+illum 2
+Ns 2
+map_Kd textures/INDIROSE.jpg
+
+newmtl OAK_BEDRM_GRAINY
+Ka 0.180392 0.109804 0.109804
+Kd 0.180392 0.109804 0.109804
+Ks 0 0 0
+illum 2
+Ns 4.92458
+map_Kd textures/MAHOGANY.jpg
+
+newmtl RED_MATTE_S
+Ka 0.407843 0.152941 0.133333
+Kd 0.298039 0.109804 0.0823529
+Ks 0.298039 0.109804 0.0823529
+illum 2
+Ns 4
+map_bump textures/SAND.jpg
+bump SAND.jpg
+
+newmtl BOOK_PAGES
+Ka 0.760784 0.537255 0.109804
+Kd 0.760784 0.537255 0.109804
+Ks 0.741176 0.741176 0.741176
+illum 2
+Ns 2
+map_Kd textures/BOOK_PAG.jpg
+
+newmtl DARK_GRAY_MATTE
+Ka 0.219608 0.219608 0.219608
+Kd 0.219608 0.219608 0.219608
+Ks 0.219608 0.219608 0.219608
+illum 2
+Ns 2
+
+newmtl CANDLE_WAX
+Ka 0.713726 0.592157 0.678431
+Kd 0.807843 0.760784 0.552941
+Ks 1 1 1
+illum 2
+Ns 48.5029
+
+newmtl BLACK_PLASTIC
+Ka 0 0 0
+Kd 0.133333 0.133333 0.133333
+Ks 0.698039 0.698039 0.698039
+illum 2
+Ns 4
+
+newmtl GOLD_FOR_SCHOOL
+Ka 0.203922 0.145098 0.0666667
+Kd 0.701961 0.537255 0.211765
+Ks 0.945098 0.905882 0.713726
+illum 2
+Ns 137.187
+refl CHAP.CUB
+
+newmtl BRASS__DARK
+Ka 0 0 0
+Kd 0.560784 0.388235 0.247059
+Ks 1 0.627451 0.486275
+illum 2
+Ns 388.023
+refl CHAP.CUB
+
+newmtl FIRE_4
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd textures/FIRE_04.IFL
+map_opacity FIRE_04.IFL
+map_d FIRE_04.IFL
+
+newmtl FIRE_1
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd textures/FIREA.IFL
+map_opacity FIREA.IFL
+map_d FIREA.IFL
+
+newmtl FIRE_2
+Ka 0 0 0
+Kd 0 0 0
+Ks 0 0 0
+illum 2
+Ns 2
+map_Kd textures/FIRE_02.IFL
+map_opacity FIRE_02.IFL
+map_d FIRE_02.IFL
+
+newmtl DESIREES_MARB
+Ka 0 0 0
+Kd 0 0 0
+Ks 0.882353 0.882353 0.882353
+illum 2
+Ns 548.748
+map_Kd textures/CAMARO.jpg
+
+newmtl WALNUT_TX_LITE
+Ka 0 0 0
+Kd 0 0 0
+Ks 0.690196 0.482353 0.219608
+illum 2
+Ns 9.84916
+map_Kd textures/EWALNUT.jpg
+
+newmtl CHROME_RAD_REFLC
+Ka 0.290196 0.290196 0.290196
+Kd 0.494118 0.494118 0.494118
+Ks 0.376471 0.376471 0.376471
+illum 2
+Ns 157.586
+refl CHAP.CUB

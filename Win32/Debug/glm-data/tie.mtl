@@ -1,0 +1,90 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  2.1.10.1214
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl CON_dark_gray_0
+Ka 0.313726 0.313726 0.313726
+Kd 0.313726 0.313726 0.313726
+Ks 0 0 0
+illum 2
+Ns 2
+
+newmtl DISK_medium_gra
+Ka 0.45098 0.372549 0.411765
+Kd 0.45098 0.372549 0.411765
+Ks 0 0 0
+illum 2
+Ns 2
+
+newmtl PART_11_light_g
+Ka 0.666667 0.666667 0.666667
+Kd 0.666667 0.666667 0.666667
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_gray_3
+Ka 0.509804 0.509804 0.509804
+Kd 0.509804 0.509804 0.509804
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_light_g1
+Ka 0.666667 0.666667 0.666667
+Kd 0.666667 0.666667 0.666667
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_light_gra
+Ka 0.721569 0.72549 0.729412
+Kd 0.721569 0.72549 0.729412
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_light_r2
+Ka 0.666667 0 0
+Kd 0.666667 0 0
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_light_r3
+Ka 0.764706 0 0
+Kd 0.764706 0 0
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_light_red
+Ka 0.823529 0.184314 0
+Kd 0.823529 0.184314 0
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_dark_gr4
+Ka 0.313726 0.313726 0.313726
+Kd 0.313726 0.313726 0.313726
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_dark_gr5
+Ka 0.294118 0.294118 0.294118
+Kd 0.294118 0.294118 0.294118
+Ks 1 1 1
+illum 2
+Ns 39.3966
+
+newmtl ICP33_dark_gray
+Ka 0.392157 0.392157 0.392157
+Kd 0.392157 0.392157 0.392157
+Ks 1 1 1
+illum 2
+Ns 39.3966
