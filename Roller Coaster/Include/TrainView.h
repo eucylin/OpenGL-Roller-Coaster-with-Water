@@ -52,6 +52,13 @@ public:
 		ThickCloudsWater,
 		TropicalSunnyDay
 	};
+	enum eShader{
+		NONE = -1,
+		wood = 0,
+		dimple,
+		kill,
+		sWater
+	};
 
 public:
 	virtual void initializeGL();
@@ -68,7 +75,7 @@ public:
 	void myDrawFloor();
 	void drawTrack(bool doingShadows = false);
 	void drawTrain(float, bool doingShadows = false);
-
+	void drawCubeSets(eShader shadeName = eShader::NONE);
 	// setup the projection - assuming that the projection stack has been
 	// cleared for you
 	void setProjection();
@@ -90,6 +97,9 @@ public:
 
 	void readSkyBox(eSkyBox skyBoxName = eSkyBox::blood);
 	void drawSkyBox(eSkyBox skyBoxName = eSkyBox::blood);
+	void drawWater();
+
+	void ApplyShader(eShader shaderName = eShader::NONE);
 
 public:
 	ArcBallCam		arcball;			// keep an ArcBall for the UI
@@ -127,7 +137,13 @@ public:
 	GLuint arrSkyboxTexture[6];
 	GLuint floorTexID = 0;
 	TextureImage moonTex;
-	GLuint program1;
+	GLuint program1, woodProgram, dimpleProgram, killProgram, sWaterProgram;
+
+	GLfloat waveTime = 0.5,
+		waveWidth = 0.6,
+		waveHeight = 0.7,
+		waveFreq = 0.0002;
+	GLuint sWaterTex[3];
 
 	/*float MatCardinal[4][4];*/
 	/*mat MatCard = mat(4, 4);*/

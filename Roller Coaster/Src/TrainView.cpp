@@ -45,8 +45,12 @@ void TrainView::initializeGL()
 	GLenum err = glewInit();
 	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
 
-	Core::Shader_Loader shaderLoader1;
-	program1 = shaderLoader1.CreateProgram("Vertex_Shader.glsl", "Fragment_Shader.glsl");
+	Core::Shader_Loader shaderLoader;
+	program1 = shaderLoader.CreateProgram("Vertex_Shader.glsl", "Fragment_Shader.glsl");
+	woodProgram = shaderLoader.CreateProgram("Shaders/wood.vert", "Shaders/wood.frag");
+	dimpleProgram = shaderLoader.CreateProgram("Shaders/dimple.vert", "Shaders/dimple.frag");
+	killProgram = shaderLoader.CreateProgram("Shaders/kill.vert", "Shaders/kill.frag");
+	sWaterProgram = shaderLoader.CreateProgram("Shaders/swater.vert", "Shaders/swater.frag");
 	//initShader("vertex.vs", "fragment.frag");
 	readSkyBox(eSkyBox::blood);
 
@@ -65,7 +69,9 @@ void TrainView::initializeGL()
 	//CBMPLoader cmbp;
 	//cmbp.LoadBitmap("NA1.JPG");
 	//LoadTGA(&moonTex, "Various0430_SO.tga");
-	floorTexID = ReadTexture("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/NA1.bmp");
+	floorTexID = ReadTexture("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/rockFloor");
+	//sWaterTex[0] = ReadTexture("wattex.png");
+	sWaterTex[0] = ReadTexture("sea");
 }
 
 void TrainView::resetArcball()
@@ -158,7 +164,7 @@ void TrainView::paintGL()
 	drawSkyBox();
 	glDisable(GL_LIGHTING);
 	setupFloor();
-	myDrawFloor();
+	//myDrawFloor();
 	//drawFloor();
 
 	//*********************************************************************
@@ -167,7 +173,7 @@ void TrainView::paintGL()
 	//*********************************************************************
 	glEnable(GL_LIGHTING);
 	setupObjects();
-
+	
 	drawStuff(false);
 	glDisable(GL_TEXTURE_2D);
 	// this time drawing is for shadows (except for top view)
@@ -291,7 +297,8 @@ void TrainView::drawStuff(bool doingShadows)
 	
 	//M3ds.Draw(modelPos);
 	drawTrain(t_time, doingShadows);
-
+	drawCubeSets();
+	drawWater();
 #ifdef EXAMPLE_SOLUTION
 	// don't draw the train if you're looking out the front window
 	if (!tw->trainCam->value())
@@ -314,10 +321,10 @@ void TrainView::myDrawFloor()
 	glBegin(GL_QUADS);
 
 	glNormal3f(0, 1, 0);
-	glTexCoord2f(0, 0); glVertex3d(-101, 0, -101);
-	glTexCoord2f(0, 1); glVertex3d(-101, 0, 101);
-	glTexCoord2f(1, 1); glVertex3d(101, 0, 101);
-	glTexCoord2f(1, 0); glVertex3d(101, 0, -101);
+	glTexCoord2f(0, 0); glVertex3d(-55, 0, -55);
+	glTexCoord2f(0, 1); glVertex3d(-55, 0, 55);
+	glTexCoord2f(1, 1); glVertex3d(55, 0, 55);
+	glTexCoord2f(1, 0); glVertex3d(55, 0, -55);
 
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -473,14 +480,30 @@ void TrainView::drawTrack(bool doingShadows)
 				glLineWidth(1);
 
 				//Draw crosstie
-				if ((int)(t * DIVIDE_LINE) % 100 == 1){
+				if ((int)(t * DIVIDE_LINE) % 50 == 5){
+					float cWidthScale = 0.8;
 					glLineWidth(50);
-					glBegin(GL_LINES);
+					glBegin(GL_QUADS);
 					if (!doingShadows){
-						glColor3ub(255, 204, 0);
+						glColor3ub(150, 75, 0);
+						//glColor3ub(255, 255, 255);
 					}
-					glVertex3f(qt0.x + cross_t.x, qt0.y + cross_t.y, qt0.z + cross_t.z);
+					glVertex3f(qt1.x - cross_t.x, qt1.y - cross_t.y, qt1.z - cross_t.z);
 					glVertex3f(qt0.x - cross_t.x, qt0.y - cross_t.y, qt0.z - cross_t.z);
+					glVertex3f(qt0.x + cross_t.x, qt0.y + cross_t.y, qt0.z + cross_t.z);
+					glVertex3f(qt1.x + cross_t.x, qt1.y + cross_t.y, qt1.z + cross_t.z);
+
+					//Pnt3f oldPoints = samplePoints[floor(samplePoints.size() * 0.95)];
+					//glTexCoord2f(0, 1);
+					//glVertex3f(qt1.x - cross_t.x, qt1.y - cross_t.y, qt1.z - cross_t.z);
+					//glTexCoord2f(0, 0);
+					//glVertex3f(oldPoints.x - cross_t.x, oldPoints.y - cross_t.y, oldPoints.z - cross_t.z);
+					//glTexCoord2f(1, 0);
+					//glVertex3f(oldPoints.x + cross_t.x, oldPoints.y + cross_t.y, oldPoints.z + cross_t.z);
+					//glTexCoord2f(1, 1);
+					//glVertex3f(qt1.x + cross_t.x, qt1.y + cross_t.y, qt1.z + cross_t.z);
+					/*glVertex3f(qt0.x + (cross_t.x)*1.8, qt0.y + (cross_t.y)*1.8, qt0.z + (cross_t.z)*1.8);
+					glVertex3f(qt0.x - (cross_t.x)*1.8, qt0.y - (cross_t.y)*1.8, qt0.z - (cross_t.z)*1.8);*/
 
 					glEnd();
 					glLineWidth(1);
@@ -541,6 +564,22 @@ void TrainView::drawTrain(float t, bool doingShadows)
 	/*Mobj->render();*/
 	/*if (this->camera != 2)
 		M3ds.Draw(modelPos0, modelPos1, orient_t);*/
+}
+
+void TrainView::drawCubeSets(eShader shadeName)
+{
+	ApplyShader(shadeName);
+	drawCube(0, -55, 0, 112);
+	glPushMatrix();
+	float cubeSpeed = 150;
+	if (t_time < 0.5)
+		glTranslatef(t_time*cubeSpeed, 0, 0);
+	else
+		glTranslatef((1 - t_time)*cubeSpeed, 0, 0);
+	for (int i = 0; i < 20; i++)
+		drawCube(rand() % 1000, 10, rand() % 1000, 20);
+	glPopMatrix();
+	glUseProgram(0);
 }
 
 void TrainView::readSkyBox(eSkyBox skyBoxName)
@@ -728,6 +767,70 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	//glPopAttrib();
 	/*glPopMatrix();*/
 	//Cloud
+}
+
+void TrainView::drawWater()
+{
+	//draw water
+	ApplyShader(eShader::sWater);
+	glPushMatrix();
+	glScalef(100, 100, 100);
+	float TS = 1.0 / 40; //0.025;
+	glEnable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
+	for (int i = -20; i < 20; i++)
+		for (int j = -20; j < 20; j++)
+		{
+
+			float startX = TS*(i + 20);
+			float startY = TS*(j + 20);
+			glTexCoord2f(startX + 0.0f, startY + 0);  glVertex3f(i, -2, j);
+			glTexCoord2f(startX + TS, startY + 0);  glVertex3f(i + 1, -2, j);
+			glTexCoord2f(startX + TS, startY + TS);  glVertex3f(i + 1, -2, j + 1);
+			glTexCoord2f(startX + 0.0f, startY + TS);  glVertex3f(i, -2, j + 1);
+		}
+	glEnd();
+	// Update wave variables
+	waveTime += waveFreq;
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+	glUseProgram(0);
+}
+
+void TrainView::ApplyShader(eShader shaderName)
+{
+	switch (shaderName)
+	{
+	case TrainView::wood:
+		glUseProgram(woodProgram);
+		glUniform1f(glGetUniformLocation(woodProgram, "GrainSizeRecip"), 1);
+		glUniform3f(glGetUniformLocation(woodProgram, "colorSpread"), 0.15, 0.075, 0);
+		glUniform3f(glGetUniformLocation(woodProgram, "DarkColor"), 0.6, 0.3, 0.1);
+		glUniform3f(glGetUniformLocation(woodProgram, "LightPosition"), 0, 0, 4);
+		glUniform1f(glGetUniformLocation(woodProgram, "Scale"), 2);
+		break;
+	case TrainView::dimple:
+		glUseProgram(dimpleProgram);
+		glUniform3f(glGetUniformLocation(dimpleProgram, "LightPosition"), 0, 300, 500);
+		glUniform1f(glGetUniformLocation(dimpleProgram, "Scale"), 1);
+		break;
+	case TrainView::kill:
+		glUseProgram(killProgram);
+		glUniform3f(glGetUniformLocation(killProgram, "LightPosition"), 0, 0, 3);
+		break;
+	case TrainView::sWater:
+		glUseProgram(sWaterProgram);
+		glUniform1f(glGetUniformLocation(sWaterProgram, "waveTime"), waveTime);
+		glUniform1f(glGetUniformLocation(sWaterProgram, "waveWidth"), waveWidth);
+		glUniform1f(glGetUniformLocation(sWaterProgram, "waveHeight"), waveHeight);
+		glActiveTexture(GL_TEXTURE0);
+		glUniform1i(glGetUniformLocation(sWaterProgram, "color_texture"), 0);
+		glBindTexture(GL_TEXTURE_2D, sWaterTex[0]);
+		break;
+	default:
+		break;
+	}
 }
 
 void TrainView::

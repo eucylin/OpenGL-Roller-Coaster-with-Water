@@ -59,6 +59,7 @@ void drawCube(float x, float y, float z, float l)
 	glPushMatrix();
 		glTranslated(x,y,z);
 		glScalef(l,l,l);
+		glColor3ub(0,175,175);
 		glBegin(GL_QUADS);
 			glNormal3d( 0,0,1);
 			glVertex3d( 0.5, 0.5, 0.5);
@@ -115,28 +116,28 @@ void drawFloor(float size, int nSquares)
 //===============================================================================
 {
 	
-	//// parameters:
-	//float maxX = size/2, maxY = size/2;
-	//float minX = -size/2, minY = -size/2;
+	// parameters:
+	float maxX = size/2, maxY = size/2;
+	float minX = -size/2, minY = -size/2;
 
-	//int x,y,v[3],i;
-	//float xp,yp,xd,yd;
-	//v[2] = 0;
-	//xd = (maxX - minX) / ((float) nSquares);
-	//yd = (maxY - minY) / ((float) nSquares);
-	//glBegin(GL_QUADS);
-	//for(x=0,xp=minX; x<nSquares; x++,xp+=xd) {
-	//	for(y=0,yp=minY,i=x; y<nSquares; y++,i++,yp+=yd) {
-	//		glColor4fv(i%2==1 ? floorColor1:floorColor2);
-	//		glNormal3f(0, 1, 0); 
-	//		glVertex3d(xp,      0, yp);
-	//		glVertex3d(xp,      0, yp + yd);
-	//		glVertex3d(xp + xd, 0, yp + yd);
-	//		glVertex3d(xp + xd, 0, yp);
+	int x,y,v[3],i;
+	float xp,yp,xd,yd;
+	v[2] = 0;
+	xd = (maxX - minX) / ((float) nSquares);
+	yd = (maxY - minY) / ((float) nSquares);
+	glBegin(GL_QUADS);
+	for(x=0,xp=minX; x<nSquares; x++,xp+=xd) {
+		for(y=0,yp=minY,i=x; y<nSquares; y++,i++,yp+=yd) {
+			glColor4fv(i%2==1 ? floorColor1:floorColor2);
+			glNormal3f(0, 1, 0); 
+			glVertex3d(xp,      0, yp);
+			glVertex3d(xp,      0, yp + yd);
+			glVertex3d(xp + xd, 0, yp + yd);
+			glVertex3d(xp + xd, 0, yp);
 
-	//	} // end of for j
-	//}// end of for i
-	//glEnd();
+		} // end of for j
+	}// end of for i
+	glEnd();
 }
 
 //*************************************************************************
