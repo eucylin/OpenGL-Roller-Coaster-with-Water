@@ -72,6 +72,10 @@ void TrainView::initializeGL()
 	floorTexID = ReadTexture("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/rockFloor");
 	//sWaterTex[0] = ReadTexture("wattex.png");
 	sWaterTex[0] = ReadTexture("sea");
+
+	for (int i = 0; i < 80; i++){
+		cubePntSets.push_back(Pnt3f(rand() % 2000 - 1000, 10 + rand() % 800 - 400, rand() % 2000 - 1000));
+	}
 }
 
 void TrainView::resetArcball()
@@ -571,14 +575,17 @@ void TrainView::drawCubeSets(eShader shadeName)
 	ApplyShader(shadeName);
 	drawCube(0, -55, 0, 112);
 	glPushMatrix();
-	float cubeSpeed = 150;
-	if (t_time < 0.5)
-		glTranslatef(t_time*cubeSpeed, 0, 0);
+	float cubeSpeed = 1050;
+	if (cubeTime >= 1)
+		cubeTime = 0;
+	if (cubeTime < 0.5)
+		glTranslatef(cubeTime*cubeSpeed, 0, 0);
 	else
-		glTranslatef((1 - t_time)*cubeSpeed, 0, 0);
-	for (int i = 0; i < 20; i++)
-		drawCube(rand() % 1000, 10, rand() % 1000, 20);
+		glTranslatef((1 - cubeTime)*cubeSpeed, 0, 0);
+	for (int i = 0; i < cubePntSets.size(); i++)
+		drawCube(cubePntSets[i].x, cubePntSets[i].y, cubePntSets[i].z, 30);
 	glPopMatrix();
+	cubeTime += cubeFreq;
 	glUseProgram(0);
 }
 
