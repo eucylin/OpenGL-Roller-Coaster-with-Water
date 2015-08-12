@@ -145,8 +145,8 @@ public:
 
 	GLfloat waveTime = 0.5,
 		waveWidth = 0.6,
-		waveHeight = 0.7,
-		waveFreq = 0.0002;
+		waveHeight = 0.9,
+		waveFreq = 0.0004;
 	GLuint sWaterTex[3];
 
 	/*float MatCardinal[4][4];*/

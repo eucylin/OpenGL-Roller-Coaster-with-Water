@@ -64,7 +64,7 @@ void TrainView::initializeGL()
 	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/CODMapShipment/Files/CODMapShipment.3ds");
 	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/old fashion town/old town block.3DS");
 
-	//M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/Train3/Train3S.3DS");
+	M3ds.Init("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/Train3/Train3S.3DS");
 	
 	//M3ds.Init("C:/Users/Chien-Hsuan/Desktop/Little_train/Small_train.3ds");
 	//CBMPLoader cmbp;
@@ -550,30 +550,30 @@ void TrainView::drawTrain(float t, bool doingShadows)
 		tt1 = samplePoints[floor(t * (samplePoints.size()-1)) + 1];
 		break; 
 	} 
-	glColor3ub(0, 0, 0);
-	glBegin(GL_QUADS);
-	//glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(tt1.x - 5, tt1.y - 5, tt1.z - 5);
-	//glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(tt1.x + 5, tt1.y - 5, tt1.z - 5);
-	//glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(tt1.x + 5, tt1.y + 5, tt1.z - 5);
-	//glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(tt1.x - 5, tt1.y + 5, tt1.z - 5);
-	glEnd();
+	//glColor3ub(0, 0, 0);
+	//glBegin(GL_QUADS);
+	////glTexCoord2f(0.0f, 0.0f);
+	//glVertex3f(tt1.x - 5, tt1.y - 5, tt1.z - 5);
+	////glTexCoord2f(1.0f, 0.0f);
+	//glVertex3f(tt1.x + 5, tt1.y - 5, tt1.z - 5);
+	////glTexCoord2f(1.0f, 1.0f);
+	//glVertex3f(tt1.x + 5, tt1.y + 5, tt1.z - 5);
+	////glTexCoord2f(0.0f, 1.0f);
+	//glVertex3f(tt1.x - 5, tt1.y + 5, tt1.z - 5);
+	//glEnd();
 
 	modelPos0 = tt0;
 	modelPos1 = tt1;
 	/*Mobj->render();*/
-	/*if (this->camera != 2)
-		M3ds.Draw(modelPos0, modelPos1, orient_t);*/
+	if (this->camera != 2)
+		M3ds.Draw(modelPos0, modelPos1, orient_t);
 }
 
 void TrainView::drawCubeSets(eShader shadeName)
 {
 	glEnable(GL_LIGHTING);
 	ApplyShader(shadeName);
-	drawCube(0, -55, 0, 112);
+	drawCube(0, -100, 0, 200);
 	glPushMatrix();
 	float cubeSpeed = 1050;
 	if (cubeTime >= 1)
