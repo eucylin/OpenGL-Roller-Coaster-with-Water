@@ -81,7 +81,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_OPENGL_LIB;QT_MULTIMEDIA_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\OpenGL\glew-1.12.0\include\GL;D:\opencv\build\include;.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\armadillo-5.100.2\include;D:\OpenGL\freeglut\include;D:\Qt\Qt5.5.0\5.5\msvc2013\include;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtCore;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtGui;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtWidgets;D:\OgreSDK_vc10_v1-8-1\include;D:\OgreSDK_vc10_v1-8-1\include\OGRE;D:\OgreSDK_vc10_v1-8-1\include\OIS;D:\OgreSDK_vc10_v1-8-1\boost;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtMultimedia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\OpenGL\glew-1.13.0\include;D:\OpenGL\Simple OpenGL Image Library\src;D:\OpenGL\assimp-3.1.1\include;D:\OpenGL\glm;D:\opencv\build\include;.;.\Include;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);D:\OpenGL\armadillo-5.100.2\include;D:\OpenGL\freeglut\include;D:\Qt\Qt5.5.0\5.5\msvc2013\include;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtCore;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtGui;D:\Qt\Qt5.5.0\5.5\msvc2013\include\QtWidgets;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtMultimedia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -94,8 +94,8 @@
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;opengl32.lib;glu32.lib;Qt5Multimediad.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\OpenGL\glew-1.12.0\lib\Release\Win32;D:\opencv\build\x86\vc12\lib;D:\OpenGL\freeglut\lib;D:\OpenGL\glut-3.7_Complied\lib;D:\Qt\Qt5.5.0\5.5\msvc2013\lib;D:\OgreSDK_vc10_v1-8-1\lib\debug;D:\OgreSDK_vc10_v1-8-1\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glew32.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5OpenGLd.lib;glut.lib;glut32.lib;opengl32.lib;glu32.lib;Qt5Multimediad.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\OpenGL\Simple OpenGL Image Library\lib;D:\OpenGL\assimp-3.1.1\build\code\Debug;D:\OpenGL\glew-1.13.0\lib\Release\Win32;D:\opencv\build\x86\vc12\lib;D:\OpenGL\freeglut\lib;D:\OpenGL\glut-3.7_Complied\lib;D:\Qt\Qt5.5.0\5.5\msvc2013\lib;D:\OgreSDK_vc10_v1-8-1\lib\debug;D:\OgreSDK_vc10_v1-8-1\boost\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -183,6 +183,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Include\Assimp\loadmain.cpp" />
     <ClCompile Include="Include\Shader\Shader_Loader.cpp" />
     <ClCompile Include="Src\AppMain.cpp" />
     <ClCompile Include="Src\ControlPoint.cpp" />
@@ -222,6 +223,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AppMain.h" />
+    <ClInclude Include="Include\Assimp\Camera.h" />
+    <ClInclude Include="Include\Assimp\Mesh.h" />
+    <ClInclude Include="Include\Assimp\Model.h" />
+    <ClInclude Include="Include\Assimp\Shader.h" />
     <ClInclude Include="Include\ControlPoint.H" />
     <ClInclude Include="Include\Load3DModel\3DSLoader.h" />
     <ClInclude Include="Include\Load3DModel\CbmpLoader.h" />

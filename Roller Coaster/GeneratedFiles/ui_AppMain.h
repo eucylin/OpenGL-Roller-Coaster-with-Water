@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'AppMainp26324.ui'
+** Form generated from reading UI file 'AppMain.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef APPMAINP26324_H
-#define APPMAINP26324_H
+#ifndef UI_APPMAIN_H
+#define UI_APPMAIN_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -729,4 +729,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // APPMAINP26324_H
+#endif // UI_APPMAIN_H

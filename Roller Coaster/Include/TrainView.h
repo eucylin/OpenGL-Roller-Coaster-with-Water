@@ -21,9 +21,9 @@
 #include "Load3DModel/TGATexture.h"
 
 
-//#include "glm/glm.hpp"
-//#include "glm/gtc/matrix_transform.hpp"
-//#include "glm/gtc/type_ptr.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 using namespace std;
 
@@ -90,13 +90,13 @@ public:
 	void doPick(int mx, int my);
 
 	//[Cloud_Lin]
-	void LoadObj(QString m_fileName){
+	/*void LoadObj(QString m_fileName){
 		Mobj = new Model(m_fileName, 1.0,
 			Point3d(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z));
-	}
-	void RenderObj(){
+	}*/
+	/*void RenderObj(){
 		Mobj->render(true, true);
-	}
+	}*/
 
 	void readSkyBox(eSkyBox skyBoxName = eSkyBox::blood);
 	void drawSkyBox(eSkyBox skyBoxName = eSkyBox::blood);
@@ -133,8 +133,10 @@ public:
 		Road = 2
 	};
 
-	Model *Mobj;
+	//Model *Mobj;
 	C3DSLoader M3ds;
+	//Shader shader("Shaders/model_loading.vs", "Shaders/model_loading.frag");
+	//Model ourModel("Models/nanosuit/nanosuit.obj");
 	Pnt3f modelPos0, modelPos1;
 	//TextureImage arrSkyboxTexture[6];
 	vector< vector<GLuint> > arrSkyboxID;

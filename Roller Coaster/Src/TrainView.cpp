@@ -1,4 +1,8 @@
-﻿#include "opencv/cv.h"
+﻿#pragma once
+#define GLEW_STATIC
+#include "GL/glew.h"
+
+#include "opencv/cv.h"
 #include "opencv/highgui.h"
 
 //#include "Shader/SimpleShaderHandler.h"
@@ -16,12 +20,16 @@
 #include "Utilities/ArcBallCam.H"
 #include <string>
 #include <cstdio>
-//#include "glm/glm.hpp"
-//#include "glm/gtc/matrix_transform.hpp"
-//#include "glm/gtc/type_ptr.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 #include <vector>
 #include <cmath>
 #include <algorithm>
+
+//assimp
+#include "Assimp/Shader.h"
+#include "Assimp/Model.h"
 
 
 using namespace std;
@@ -80,6 +88,7 @@ void TrainView::initializeGL()
 	for (int i = 0; i < 80; i++){
 		cubePntSets.push_back(Pnt3f(rand() % 2000 - 1000, 10 + rand() % 800 - 400, rand() % 2000 - 1000));
 	}
+
 }
 
 void TrainView::resetArcball()
@@ -304,6 +313,7 @@ void TrainView::drawStuff(bool doingShadows)
 	//####################################################################
 	
 	//M3ds.Draw(modelPos);
+	
 	drawTrain(t_time, doingShadows);
 	drawCubeSets(nowCubeShader);
 	drawWater();

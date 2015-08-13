@@ -48,6 +48,9 @@
     <Filter Include="Header Files\Shader">
       <UniqueIdentifier>{7e8cfb1c-ddcc-418d-a305-39815800f30d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Assimp">
+      <UniqueIdentifier>{74c68c14-3f5d-48a7-98b9-5c2ce4b0ecf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_AppMain.cpp">
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="Include\Shader\Shader_Loader.cpp">
       <Filter>Header Files\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Assimp\loadmain.cpp">
+      <Filter>Header Files\Assimp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +173,18 @@
     </ClInclude>
     <ClInclude Include="Include\Load3DModel\ReadTexture.h">
       <Filter>Header Files\Load3DModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Assimp\Camera.h">
+      <Filter>Header Files\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Assimp\Mesh.h">
+      <Filter>Header Files\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Assimp\Model.h">
+      <Filter>Header Files\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Assimp\Shader.h">
+      <Filter>Header Files\Assimp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
