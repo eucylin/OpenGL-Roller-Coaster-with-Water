@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include "AppMain.h"
 #include <QtWidgets/QApplication>
 

@@ -1,9 +1,6 @@
 ﻿#pragma once
-#define GLEW_STATIC
-#include "GL/glew.h"
-
-#include "opencv/cv.h"
-#include "opencv/highgui.h"
+//#include "opencv/cv.h"
+//#include "opencv/highgui.h"
 
 //#include "Shader/SimpleShaderHandler.h"
 #include "Shader/Shader_Loader.h"
@@ -27,9 +24,9 @@
 #include <cmath>
 #include <algorithm>
 
-//assimp
-#include "Assimp/Shader.h"
-#include "Assimp/Model.h"
+////assimp
+//#include "Assimp/Shader.h"
+//#include "Assimp/Model.h"
 
 
 using namespace std;

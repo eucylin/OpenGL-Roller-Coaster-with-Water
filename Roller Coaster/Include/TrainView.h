@@ -25,6 +25,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+//#include "Assimp/Shader.h"
+//#include "Assimp/Model.h"
 using namespace std;
 
 class AppMain;

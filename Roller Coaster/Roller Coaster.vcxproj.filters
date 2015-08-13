@@ -48,8 +48,8 @@
     <Filter Include="Header Files\Shader">
       <UniqueIdentifier>{7e8cfb1c-ddcc-418d-a305-39815800f30d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Assimp">
-      <UniqueIdentifier>{74c68c14-3f5d-48a7-98b9-5c2ce4b0ecf8}</UniqueIdentifier>
+    <Filter Include="Header Files\Ass">
+      <UniqueIdentifier>{92a6f9d0-70a2-4db9-9141-2aac511e61af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,9 +109,6 @@
     </ClCompile>
     <ClCompile Include="Include\Shader\Shader_Loader.cpp">
       <Filter>Header Files\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Assimp\loadmain.cpp">
-      <Filter>Header Files\Assimp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,16 +172,16 @@
       <Filter>Header Files\Load3DModel</Filter>
     </ClInclude>
     <ClInclude Include="Include\Assimp\Camera.h">
-      <Filter>Header Files\Assimp</Filter>
+      <Filter>Header Files\Ass</Filter>
     </ClInclude>
     <ClInclude Include="Include\Assimp\Mesh.h">
-      <Filter>Header Files\Assimp</Filter>
+      <Filter>Header Files\Ass</Filter>
     </ClInclude>
     <ClInclude Include="Include\Assimp\Model.h">
-      <Filter>Header Files\Assimp</Filter>
+      <Filter>Header Files\Ass</Filter>
     </ClInclude>
     <ClInclude Include="Include\Assimp\Shader.h">
-      <Filter>Header Files\Assimp</Filter>
+      <Filter>Header Files\Ass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

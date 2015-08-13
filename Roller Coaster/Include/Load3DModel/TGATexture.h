@@ -1,6 +1,6 @@
 #ifndef TGATEXTURE_H  
 #define TGATEXTURE_H  
-  
+
 #include <GL/glut.h>  
 #include <iostream>  
   
