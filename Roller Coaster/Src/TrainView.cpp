@@ -56,7 +56,7 @@ void TrainView::initializeGL()
 	//readSkyBox(eSkyBox::blood);
 
 	for (int i = eSkyBox::SkyboxBegin; i <= eSkyBox::SkyboxEnd; i++)
-		readSkyBox(eSkyBox::blood);
+		readSkyBox((eSkyBox)i);
 
 	/*Mobj = new Model("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/colony sector/colony sector.obj", 15.0,
 	Point3d(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z));*/
