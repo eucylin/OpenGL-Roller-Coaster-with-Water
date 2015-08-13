@@ -467,37 +467,37 @@ void AppMain::ChangeTrackToRoad()
 
 void AppMain::ChangeSkyboxToBlood()
 {
-	this->trainview->readSkyBox(TrainView::blood);
+	this->trainview->nowSkyBox = TrainView::blood;
 }
 
 void AppMain::ChangeSkyboxToCloudyLightRays()
 {
-	this->trainview->readSkyBox(TrainView::cloudLightRay);
+	this->trainview->nowSkyBox = TrainView::cloudLightRay;
 }
 
 void AppMain::ChangeSkyboxToDarkStormy()
 {
-	this->trainview->readSkyBox(TrainView::DarkStormy);
+	this->trainview->nowSkyBox = TrainView::DarkStormy;
 }
 
 void AppMain::ChangeSkyboxToFullMoon()
 {
-	this->trainview->readSkyBox(TrainView::FullMoon);
+	this->trainview->nowSkyBox = TrainView::FullMoon;
 }
 
 void AppMain::ChangeSkyboxToSunSet()
 {
-	this->trainview->readSkyBox(TrainView::SunSet);
+	this->trainview->nowSkyBox = TrainView::SunSet;
 }
 
 void AppMain::ChangeSkyboxToThickCloudsWater()
 {
-	this->trainview->readSkyBox(TrainView::ThickCloudsWater);
+	this->trainview->nowSkyBox = TrainView::ThickCloudsWater;
 }
 
 void AppMain::ChangeSkyboxToTropicalSunnyDay()
 {
-	this->trainview->readSkyBox(TrainView::TropicalSunnyDay);
+	this->trainview->nowSkyBox = TrainView::TropicalSunnyDay;
 }
 
 void AppMain::ChangeShaderToNONE()

@@ -53,7 +53,10 @@ void TrainView::initializeGL()
 	sWaterProgram = shaderLoader.CreateProgram("Shaders/swater.vert", "Shaders/swater.frag");
 	PhongProgram = shaderLoader.CreateProgram("Shaders/Phong.vert", "Shaders/Phong.frag");
 	//initShader("vertex.vs", "fragment.frag");
-	readSkyBox(eSkyBox::blood);
+	//readSkyBox(eSkyBox::blood);
+
+	for (int i = eSkyBox::SkyboxBegin; i <= eSkyBox::SkyboxEnd; i++)
+		readSkyBox(eSkyBox::blood);
 
 	/*Mobj = new Model("D:/Users/Chien-Hsuan/Documents/Visual Studio 2013/Projects/RollerCoaster/Win32/Debug/Models/colony sector/colony sector.obj", 15.0,
 	Point3d(m_pTrack->points[0].pos.x, m_pTrack->points[0].pos.y, m_pTrack->points[0].pos.z));*/
@@ -166,7 +169,7 @@ void TrainView::paintGL()
 	//*********************************************************************
 	// now draw the ground plane
 	//*********************************************************************
-	drawSkyBox();
+	drawSkyBox(nowSkyBox);
 	glDisable(GL_LIGHTING);
 	setupFloor();
 	//myDrawFloor();
@@ -662,10 +665,11 @@ void TrainView::readSkyBox(eSkyBox skyBoxName)
 	//	if (!LoadTGA(&arrSkyboxTexture[i], s_filename[i].c_str()))
 	//		qDebug() << "SHIT! Load Skybox Texture Failed";
 	//}
-
-	for (int i = 0; i < 6; i++){
-		arrSkyboxTexture[i] = ReadTexture(s_filename[i].c_str());
-	}
+	vector<GLuint> arrSkyboxTexture;
+	for (int i = 0; i < 6; i++)
+		arrSkyboxTexture.push_back(ReadTexture(s_filename[i].c_str()));
+	
+	arrSkyboxID.push_back(arrSkyboxTexture);
 }
 
 void TrainView::drawSkyBox(eSkyBox skyBoxName)
@@ -715,7 +719,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glColor4f(1, 1, 1, 1);
 
 	// Render the front quad
-	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[0]);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxID[(int)skyBoxName][0]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(1500, -1500, -1500);
 	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, -1500);
@@ -724,7 +728,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the left quad
-	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[1]);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxID[(int)skyBoxName][1]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(1500, -1500, 1500);
 	glTexCoord2f(1, 0); glVertex3f(1500, -1500, -1500);
@@ -733,7 +737,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the back quad
-	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[2]);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxID[(int)skyBoxName][2]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, 1500);
 	glTexCoord2f(1, 0); glVertex3f(1500, -1500, 1500);
@@ -743,7 +747,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the right quad
-	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[3]);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxID[(int)skyBoxName][3]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
 	glTexCoord2f(1, 0); glVertex3f(-1500, -1500, 1500);
@@ -752,7 +756,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the top quad
-	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[4]);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxID[(int)skyBoxName][4]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 1); glVertex3f(-1500, 1500, -1500);
 	glTexCoord2f(0, 0); glVertex3f(-1500, 1500, 1500);
@@ -761,7 +765,7 @@ void TrainView::drawSkyBox(eSkyBox skyBoxName)
 	glEnd();
 
 	// Render the bottom quad
-	glBindTexture(GL_TEXTURE_2D, arrSkyboxTexture[5]);
+	glBindTexture(GL_TEXTURE_2D, arrSkyboxID[(int)skyBoxName][5]);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 0); glVertex3f(-1500, -1500, -1500);
 	glTexCoord2f(0, 1); glVertex3f(-1500, -1500, 1500);

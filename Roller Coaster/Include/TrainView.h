@@ -50,7 +50,9 @@ public:
 		FullMoon,
 		SunSet,
 		ThickCloudsWater,
-		TropicalSunnyDay
+		TropicalSunnyDay,
+		SkyboxBegin = blood,
+		SkyboxEnd = TropicalSunnyDay
 	};
 	enum eShader{
 		NONE = -1,
@@ -135,7 +137,8 @@ public:
 	C3DSLoader M3ds;
 	Pnt3f modelPos0, modelPos1;
 	//TextureImage arrSkyboxTexture[6];
-	GLuint arrSkyboxTexture[6];
+	vector< vector<GLuint> > arrSkyboxID;
+	eSkyBox nowSkyBox = blood;
 	GLuint floorTexID = 0;
 	TextureImage moonTex;
 	GLuint program1, woodProgram, dimpleProgram, killProgram, sWaterProgram, PhongProgram;
